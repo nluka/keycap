@@ -1,0 +1,21 @@
+#practiceText {
+  background-color: rgb(var(--rgb-h2));
+  box-shadow: var(--shadow1);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem;
+  user-select: none;
+  white-space: pre-wrap;
+}
+
+#practiceText * {
+  font-family: var(--mono-font-family);
+  font-size: 1.25rem;
+}
+
+#practiceText kbd {
+  border: 1px solid var(--color-border-mid);
+  background-color: transparent;
+  font-size: 0.9rem;
+  padding: 0.35rem;
+}

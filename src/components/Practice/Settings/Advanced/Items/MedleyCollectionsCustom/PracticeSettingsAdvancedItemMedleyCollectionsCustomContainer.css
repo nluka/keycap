@@ -1,0 +1,15 @@
+.practice-settings .custom-collection {
+  border-left: 2px solid var(--color-border-mid);
+}
+
+#practiceSettingsAdvanced button.add-custom-collection {
+  width: fit-content;
+}
+
+#practiceSettingsAdvanced button.add-custom-collection > i {
+  font-size: 0.9rem;
+}
+
+#practiceSettingsAdvanced .built-in-collection {
+  background-color: rgb(var(--rgb-h3));
+}

@@ -1,0 +1,7 @@
+#practiceSettingsAdvanced button.add-custom-text {
+  width: fit-content;
+}
+
+#practiceSettingsAdvanced button.add-custom-text > i {
+  font-size: 0.9rem;
+}

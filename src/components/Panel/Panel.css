@@ -1,0 +1,25 @@
+.panel {
+  background-color: rgb(var(--rgb-h1));
+  box-shadow: var(--shadow1);
+}
+
+.panel .heading {
+  opacity: 1;
+}
+.panel[data-dim='true'] .heading {
+  opacity: 0.5;
+}
+
+.panel .heading > h3 {
+  cursor: pointer;
+  user-select: none;
+}
+
+.panel .heading .collapse-toggler {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+hr.panel-divider {
+  height: 0.1px;
+}

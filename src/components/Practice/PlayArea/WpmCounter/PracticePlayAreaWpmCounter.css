@@ -1,0 +1,19 @@
+#practiceWpmCounter {
+  cursor: help;
+  font-size: 1.15rem;
+  user-select: none;
+  white-space: nowrap;
+  width: min-content;
+}
+#practiceWpmCounter[data-active='false'] {
+  color: transparent !important;
+  cursor: default;
+}
+
+#practiceWpmCounter .value {
+  min-width: 1ch;
+}
+
+#practiceWpmCounter :is(.value, .unit) {
+  font-family: var(--mono-font-family);
+}

@@ -1,0 +1,13 @@
+#practiceSettingsAdvanced .custom-text {
+  border-left-width: 2px;
+  border-left-style: solid;
+}
+
+#practiceSettingsAdvanced .custom-text .name {
+  width: calc(32ch + 1.1rem);
+}
+
+#practiceSettingsAdvanced .custom-text .content {
+  font-family: var(--mono-font-family);
+  height: max-content;
+}

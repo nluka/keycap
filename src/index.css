@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css');
+
+:root {
+  /* Elevation colors */
+  --rgb-h0: 15,20,25;
+  --rgb-h1: 25,30,35;
+  --rgb-h2: 35,40,45;
+  --rgb-h3: 45,50,55;
+  --rgb-h4: 60,65,70;
+  --rgb-h5: 85,90,95;
+
+  /* Shadows */
+  --shadow1: 0 0 4px -2px black;
+  --shadow2: 0 0 6px -2px black;
+  --shadow3: 0 0 8px -3px black;
+  --shadow4: 0 0 10px -4px black;
+  --shadow5: 0 0 12px -5px black;
+
+  /* Border colors */
+  --color-border-high: #777;
+  --color-border-mid: #555;
+  --color-border-low: #333;
+
+  /* Text colors */
+  --color-text-high: rgba(255,255,255, 0.9);
+  --color-text-norm: rgba(255,255,255, 0.75);
+  --color-text-low: rgba(255,255,255, 0.5);
+
+  /* Other colors */
+  --rgb-red: 220,53,69;
+  --rgb-green: 24,219,17;
+
+  --duration-short: 0.35s;
+  --mono-font-family: 'Consolas', 'Inconsolata', monospace;
+}
+
+*,
+*::before,
+*::after {
+  font-family: 'Roboto', sans-serif;
+}
+
+*[data-visible='false'] {
+  display: none !important;
+}
+
+a {
+  color: #599cff;
+}
+a:hover {
+  color: #92beff;
+}
+
+body {
+  background-color: rgb(var(--rgb-h0));
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.3rem;
+}
+h3 {
+  font-size: 1.1rem;
+}
+h4, h5, h6 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1.125rem;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 500;
+}
+
+::-webkit-scrollbar {
+  border: 1px solid var(--color-border-low);
+  height: 7.5px;
+  width: 7.5px;
+}
+::-webkit-scrollbar-track {
+  background-color: black;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--rgb-h5));
+}
+
+input,
+textarea {
+  border-color: transparent;
+}
+:is(input, textarea):focus {
+  border-color: var(--color-border-mid);
+}
+input,
+textarea,
+:is(input, textarea):focus {
+  background-color: rgb(var(--rgb-h3));
+  border-style: solid;
+  border-width: 1px;
+  color: var(--color-text-norm);
+  box-shadow: none;
+  outline: none;
+}
+
+input[type='number'] {
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* Chrome, Safari, Edge, Opera */
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  /* Firefox */
+  -moz-appearance: textfield;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: 1px solid var(--color-border-mid);
+  color: var(--color-text-norm);
+  font-weight: 300;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+/* Utility Classes */
+.text-high {
+  color: var(--color-text-high);
+}
+.text-norm {
+  color: var(--color-text-norm);
+}
+.text-low {
+  color: var(--color-text-low);
+}

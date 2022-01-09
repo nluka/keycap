@@ -1,0 +1,13 @@
+#practiceSettingsAdvanced .medley-collection-custom {
+  border-left-width: 2px;
+  border-left-style: solid;
+}
+
+#practiceSettingsAdvanced .medley-collection-custom .name {
+  width: calc(32ch + 1.1rem);
+}
+
+#practiceSettingsAdvanced .medley-collection-custom .items {
+  font-family: var(--mono-font-family);
+  height: max-content;
+}

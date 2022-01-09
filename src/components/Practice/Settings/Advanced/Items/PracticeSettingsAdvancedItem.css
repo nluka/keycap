@@ -1,0 +1,8 @@
+#practiceSettingsAdvanced .item i:is(.bi-pin, .bi-pin-fill) {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+#practiceSettingsAdvanced .item i.bi-pin {
+  opacity: 0.75;
+}

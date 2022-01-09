@@ -1,0 +1,24 @@
+#practiceMistakeAnalysis {
+  font-family: var(--mono-font-family);
+  font-size: 1.1rem;
+  flex-wrap: wrap;
+  user-select: none;
+}
+
+#practiceMistakeAnalysis * {
+  font-family: var(--mono-font-family);
+}
+
+#practiceMistakeAnalysis .mistake {
+  background-color: rgb(var(--rgb-h2));
+  box-shadow: var(--shadow1);
+  cursor: help;
+}
+
+#practiceMistakeAnalysis .mistake .input {
+  border-right: 1px solid var(--color-border-low);
+}
+
+#practiceMistakeAnalysis .mistake .time {
+  border-left: 1px solid var(--color-border-low);
+}

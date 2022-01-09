@@ -1,0 +1,6 @@
+#practiceCountdownTimer {
+  user-select: none;
+}
+#practiceCountdownTimer[data-active='false'] {
+  color: transparent;
+}

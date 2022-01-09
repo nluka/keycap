@@ -1,0 +1,16 @@
+.practice-settings :is(.action-bar, .cards-container, .items-container) {
+  overflow-x: auto;
+  scrollbar-width: 7.5px;
+}
+
+.practice-settings .action-bar {
+  width: 100%;
+}
+
+.practice-settings .action-bar input[type='search'] {
+  /* !important flags for iOS Safari... */
+  background-color: rgb(var(--rgb-h3)) !important;
+  border-radius: 0.25rem !important;
+  color: var(--color-text-norm);
+  width: 20ch;
+}

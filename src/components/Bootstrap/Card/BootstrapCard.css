@@ -1,0 +1,9 @@
+.card {
+  background-color: transparent;
+}
+
+.card-body {
+  background-color: rgb(var(--bg-color));
+  border: transparent !important;
+  padding: 0.75rem;
+}

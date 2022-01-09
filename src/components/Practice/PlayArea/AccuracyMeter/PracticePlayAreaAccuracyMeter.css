@@ -1,0 +1,12 @@
+#practiceAccuracyMeter {
+  cursor: help;
+  font-family: var(--mono-font-family);
+  font-size: 1.15rem;
+  user-select: none;
+  white-space: nowrap;
+  width: min-content;
+}
+#practiceAccuracyMeter[data-active='false'] {
+  color: transparent;
+  cursor: default;
+}

@@ -1,0 +1,26 @@
+.boolean-input {
+  cursor: pointer;
+  user-select: none;
+}
+
+.boolean-input > label {
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.boolean-input > input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  left: 0;
+  top: 0;
+}
+.boolean-input > input:hover {
+  background-color: rgb(var(--rgb-h4));
+}
+.boolean-input > input:checked {
+  background-color: rgb(var(--rgb-h5));
+}

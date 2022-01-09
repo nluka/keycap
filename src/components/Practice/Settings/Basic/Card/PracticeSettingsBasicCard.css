@@ -1,0 +1,24 @@
+#practiceSettingsBasic .card {
+  height: min-content;
+  max-width: max-content;
+  min-width: max-content;
+}
+
+#practiceSettingsBasic .card h4 {
+  max-width: 150px;
+  width: fit-content;
+}
+
+#practiceSettingsBasic .card i.bi {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+#practiceSettingsBasic .card i.bi-pin {
+  opacity: 0.75;
+}
+
+#practiceSettingsBasic .card :is(input[type='number'], button) {
+  text-align: center;
+  width: 100%;
+  max-width: 150px;
+}

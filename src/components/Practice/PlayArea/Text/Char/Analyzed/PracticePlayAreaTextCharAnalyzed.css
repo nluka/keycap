@@ -1,0 +1,31 @@
+#practiceText .char.analyzed {
+  color: rgb(var(--rgb-green));
+}
+#practiceText
+  .char.analyzed:is([data-mistake-count='low'], [data-mistake-count='medium'], [data-mistake-count='high']) {
+  --bg-alpha: 0;
+  background-color: rgba(var(--rgb-red), var(--bg-alpha));
+  color: var(--color-text-high);
+  cursor: pointer;
+  z-index: 10;
+}
+#practiceText
+  .char.analyzed:is([data-mistake-count='low'], [data-mistake-count='medium'], [data-mistake-count='high']).selected::after {
+  box-shadow: 0 0 0 1px var(--caret-color);
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+#practiceText .char.analyzed[data-mistake-count='low'] {
+  --bg-alpha: 0.5;
+}
+#practiceText .char.analyzed[data-mistake-count='medium'] {
+  --bg-alpha: 0.7;
+}
+#practiceText .char.analyzed[data-mistake-count='high'] {
+  --bg-alpha: 0.9;
+}

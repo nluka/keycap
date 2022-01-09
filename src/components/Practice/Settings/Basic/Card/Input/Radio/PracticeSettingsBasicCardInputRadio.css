@@ -1,0 +1,30 @@
+.radio-option {
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio-option > label {
+  border: none;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.radio-option > input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  left: 0;
+  top: 0;
+}
+.radio-option input:focus {
+  border: 1px solid var(--color-border-mid);
+
+}
+.radio-option input:hover {
+  background-color: rgb(var(--rgb-h4));
+}
+.radio-option > input:checked {
+  background-color: rgb(var(--rgb-h5));
+}

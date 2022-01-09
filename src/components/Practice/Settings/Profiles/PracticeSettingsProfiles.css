@@ -1,0 +1,15 @@
+#practiceSettingsProfiles .profiles-container {
+  overflow-x: auto;
+}
+
+#practiceSettingsProfiles .card {
+  min-width: fit-content;
+}
+
+#practiceSettingsProfiles .profile .name {
+  width: calc(16ch + 1.1rem);
+}
+
+#practiceSettingsProfiles button.add-profile {
+  width: fit-content
+}

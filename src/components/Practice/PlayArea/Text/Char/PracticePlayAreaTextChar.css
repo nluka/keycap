@@ -1,0 +1,113 @@
+:root {
+  --caret-color: var(--color-text-norm);
+}
+
+#practiceText .char {
+  position: relative;
+}
+#practiceText .char[data-correct='true'] {
+  color: rgb(var(--rgb-green));
+}
+#practiceText
+  .char[data-correct='false'][data-mistake-highlight-style='background'] {
+  background-color: rgba(var(--rgb-red), 0.75);
+}
+#practiceText .char[data-correct='false'][data-mistake-highlight-style='text'] {
+  color: rgb(var(--rgb-red));
+}
+#practiceText
+  .char[data-correct='false'][data-space='true'][data-mistake-highlight-style='text'] {
+  background-color: rgba(var(--rgb-red), 0.5);
+}
+
+#practiceText .char[data-caret]::after {
+  animation-delay: attr(data-caret-delay, initial);
+  animation-direction: normal;
+  animation-duration: 1s;
+  animation-fill-mode: none;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+#practiceText .char[data-caret='bar']::after {
+  animation-name: caret-blink-bar;
+  border-left: 2px solid var(--caret-color);
+}
+#practiceText .char[data-caret='block']::after {
+  animation-name: caret-blink-block;
+  background-color: var(--caret-color);
+  opacity: 0.25;
+}
+#practiceText .char[data-caret='underline']::after {
+  animation-name: caret-blink-underline;
+  border-bottom: 1px solid var(--caret-color);
+}
+#practiceText .char[data-caret='outline']::after {
+  animation-name: caret-blink-outline;
+  border: 1px solid var(--caret-color);
+}
+
+@keyframes caret-blink-bar {
+  0% {
+    border-left-color: var(--caret-color);
+  }
+  49% {
+    border-left-color: var(--caret-color);
+  }
+  50% {
+    border-left-color: transparent;
+  }
+  100% {
+    border-left-color: transparent;
+  }
+}
+
+@keyframes caret-blink-block {
+  0% {
+    background-color: var(--caret-color);
+  }
+  49% {
+    background-color: var(--caret-color);
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes caret-blink-underline {
+  0% {
+    border-bottom-color: var(--caret-color);
+  }
+  49% {
+    border-bottom-color: var(--caret-color);
+  }
+  50% {
+    border-bottom-color: transparent;
+  }
+  100% {
+    border-bottom-color: transparent;
+  }
+}
+
+@keyframes caret-blink-outline {
+  0% {
+    border-color: var(--caret-color);
+  }
+  49% {
+    border-color: var(--caret-color);
+  }
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: transparent;
+  }
+}

@@ -1,0 +1,13 @@
+#practiceStopwatch {
+  cursor: help;
+  font-family: var(--mono-font-family);
+  font-size: 1.15rem;
+  min-width: 4ch;
+  user-select: none;
+  white-space: nowrap;
+  width: min-content;
+}
+#practiceStopwatch[data-active='false'] {
+  color: transparent;
+  cursor: default;
+}
