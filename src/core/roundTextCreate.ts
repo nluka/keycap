@@ -15,15 +15,15 @@ export default function roundTextCreate(content: string): IRoundText {
     );
   }
 
-  const chunks = content.trim().split(/ +/);
-  const lastChunkIndex = chunks.length - 1;
+  const contentChunks = content.trim().split(/ +/);
+  const lastChunkIndex = contentChunks.length - 1;
 
   const items: IRoundTextItem[] = [];
 
   for (let i = 0; i < lastChunkIndex; ++i) {
-    items[i] = roundTextItemCreate(chunks[i] + SPACE);
+    items[i] = roundTextItemCreate(contentChunks[i] + SPACE);
   }
-  items[lastChunkIndex] = roundTextItemCreate(chunks[lastChunkIndex]);
+  items[lastChunkIndex] = roundTextItemCreate(contentChunks[lastChunkIndex]);
 
   return {
     items,

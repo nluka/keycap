@@ -25,17 +25,16 @@ export default function PracticePlayAreaInput() {
 
   useEffect(() => {
     if (
-      roundStatus === PracticeStatus.running ||
-      roundStatus === PracticeStatus.countingDown
+      [PracticeStatus.running, PracticeStatus.countingDown].includes(
+        roundStatus,
+      )
     ) {
       element.current?.focus();
     }
     setValue('');
   }, [roundStatus]);
 
-  useEffect(() => {
-    setValue('');
-  }, [textItemsCompletedCount]);
+  useEffect(() => setValue(''), [textItemsCompletedCount]);
 
   // Cleanup
   useEffect(
@@ -56,13 +55,13 @@ export default function PracticePlayAreaInput() {
       return undefined;
     }
     if (roundStatus === PracticeStatus.idle) {
-      return 'Press Enter to start';
+      return 'Enter to start';
     }
     if (
       roundStatus === PracticeStatus.countingDown ||
       roundStatus === PracticeStatus.generatingText
     ) {
-      return 'Press Shift + Enter to abort';
+      return 'Shift + Enter to abort';
     }
     return undefined;
   }
