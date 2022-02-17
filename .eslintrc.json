@@ -20,7 +20,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": ["error", "windows"],
     "@typescript-eslint/semi": ["error", "always"],
     "@typescript-eslint/explicit-module-boundary-types": ["off"],
     "@typescript-eslint/ban-types": ["off"],
