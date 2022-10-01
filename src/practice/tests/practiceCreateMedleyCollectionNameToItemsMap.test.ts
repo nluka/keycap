@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
-import type { IPracticeMedleyCollection } from 'keycap-foundation';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../resources/medley_collections/default-collections';
 import randNumbers from '../../resources/medley_collections/randNumbers';
+import type { IPracticeMedleyCollection } from '../../utility/types/practice';
 import practiceCreateMedleyCollectionNameToItemsMap from '../practiceCreateMedleyCollectionNameToItemsMap';
 
 describe('practiceCreateMedleyCollectionNameToItemsMap', () => {

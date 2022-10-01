@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '../../../../redux/hooks';
 import store from '../../../../redux/store';
-import { PracticeStatus } from '../../../../redux/types/IStatePractice';
+import { PracticeStatus } from '../../../../redux/types';
 import './PracticePlayAreaAccuracyMeter.css';
 
 export default function PracticePlayAreaAccuracyMeter() {

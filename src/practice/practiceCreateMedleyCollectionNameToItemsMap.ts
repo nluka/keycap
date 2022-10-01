@@ -1,4 +1,4 @@
-import type { IPracticeMedleyCollection } from 'keycap-foundation';
+import type { IPracticeMedleyCollection } from '../utility/types/practice';
 
 export default function practiceCreateMedleyCollectionNameToItemsMap(
   definedCollections: IPracticeMedleyCollection[],

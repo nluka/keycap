@@ -1,14 +1,10 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import alertReducer from './reducers/alertReducer';
-import practiceReducer from './reducers/practiceReducer';
-import userReducer from './reducers/userReducer';
+import practiceReducer from './reducer';
 
 const rootReducer = combineReducers({
-  user: userReducer,
   practice: practiceReducer,
-  alerts: alertReducer,
 });
 
 const middleware = [thunk];

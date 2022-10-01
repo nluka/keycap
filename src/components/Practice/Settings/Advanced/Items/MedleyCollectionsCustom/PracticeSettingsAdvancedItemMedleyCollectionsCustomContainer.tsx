@@ -1,9 +1,9 @@
-import type { IPracticeMedleyCollection } from 'keycap-foundation';
 import React from 'react';
 import { v4 } from 'uuid';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/settings';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../../../../../resources/medley_collections/default-collections';
+import type { IPracticeMedleyCollection } from '../../../../../../utility/types/practice';
 import BootstrapButton from '../../../../../Bootstrap/Button/BootstrapButton';
 import PracticeSettingsAdvancedItem from '../PracticeSettingsAdvancedItem';
 import PracticeSettingsAdvancedItemMedleyCollectionCustom from './Collection/PracticeSettingsAdvancedItemMedleyCollectionCustom';
@@ -11,9 +11,7 @@ import './PracticeSettingsAdvancedItemMedleyCollectionsCustomContainer.css';
 
 export default function PracticeSettingsAdvancedItemMedleyCollectionsCustomContainer() {
   const medleyCollectionsCustom = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config
-        .medleyCollectionsCustom,
+    (state) => state.practice.settings.current.medleyCollectionsCustom,
   );
 
   return (
@@ -57,9 +55,7 @@ function BuiltInCollection(props: IPropsBuiltInCollection) {
 
 function AddCollectionButton() {
   const medleyCollectionsCustom = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config
-        .medleyCollectionsCustom,
+    (state) => state.practice.settings.current.medleyCollectionsCustom,
   );
   const dispatch = useAppDispatch();
 
@@ -70,7 +66,6 @@ function AddCollectionButton() {
         if (medleyCollectionsCustom.length < 3) {
           dispatch(
             actionCreatorPracticeSettingsCurrentConfigUpdate({
-              category: 'advanced',
               name: 'medleyCollectionsCustom',
               value: [
                 ...medleyCollectionsCustom,

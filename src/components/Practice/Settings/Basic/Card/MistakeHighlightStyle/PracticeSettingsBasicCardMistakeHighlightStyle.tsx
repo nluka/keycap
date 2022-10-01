@@ -24,8 +24,7 @@ export default function PracticeSettingsBasicCardMistakeHighlightStyle() {
 
 function Input() {
   const mistakeHighlightStyle = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.mistakeHighlightStyle,
+    (state) => state.practice.settings.current.mistakeHighlightStyle,
   );
 
   return (

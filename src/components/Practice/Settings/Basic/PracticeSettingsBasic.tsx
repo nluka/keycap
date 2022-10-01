@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import localStorageItems, {
-  localStorageGetBool,
-} from '../../../../local-storage';
+import storage from '../../../../local-storage';
 import Panel from '../../../Panel/Panel';
 import PracticeSettingsBasicActionBar from './ActionBar/PracticeSettingsBasicActionBar';
 import PracticeSettingsBasicCardsContainer from './Card/PracticeSettingsBasicCardsContainer';
@@ -9,16 +7,14 @@ import PracticeSettingsBasicCardsContainer from './Card/PracticeSettingsBasicCar
 export default function PracticeSettingsBasic() {
   const [searchValue, setSearchValue] = useState('');
   const [onlyShowPinned, setOnlyShowPinned] = useState(
-    localStorageGetBool(
-      localStorageItems.onlyShowPinnedPracticeSettingsBasic,
-    ) || false,
+    storage.getBool(storage.items.onlyShowPinnedPracticeSettingsBasic) || false,
   );
 
   return (
     <Panel
       classes="practice-settings"
       collapseLocalStorageKey={
-        localStorageItems.isPanelCollapsedPracticeSettingsBasic
+        storage.items.isPanelCollapsedPracticeSettingsBasic
       }
       heading="Basic"
       id="practiceSettingsBasic"

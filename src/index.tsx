@@ -5,13 +5,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './components/App/App';
 import './index.css';
-import { localStorageCleanAndFix } from './local-storage';
 import store from './redux/store';
 import { INFO_MESSAGE_STYLES } from './utility/constants';
 
 console.log(`%cEnvironment = ${import.meta.env.MODE}`, INFO_MESSAGE_STYLES);
-
-localStorageCleanAndFix();
 
 ReactDOM.render(
   <React.StrictMode>

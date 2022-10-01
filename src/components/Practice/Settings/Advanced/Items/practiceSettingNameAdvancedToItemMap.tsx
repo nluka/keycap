@@ -1,6 +1,6 @@
-import type { PracticeSettingNameAdvanced } from 'keycap-foundation';
 import React from 'react';
 import { v4 } from 'uuid';
+import type { PracticeSettingName } from '../../../../../utility/types/practice';
 import PracticeSettingsAdvancedItemCustomTextsContainer from './CustomTexts/PracticeSettingsAdvancedItemCustomTextsContainer';
 import PracticeSettingsAdvancedItemMedleyCollectionsCustomContainer from './MedleyCollectionsCustom/PracticeSettingsAdvancedItemMedleyCollectionsCustomContainer';
 
@@ -10,7 +10,7 @@ interface IPracticeSettingAdvancedItem {
 }
 
 const practiceSettingNameAdvancedToItemMap = new Map<
-  PracticeSettingNameAdvanced,
+  PracticeSettingName,
   IPracticeSettingAdvancedItem
 >([
   [

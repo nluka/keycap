@@ -1,13 +1,14 @@
-import { createDeepCopy, IPracticeCustomText } from 'keycap-foundation';
 import React, { useRef, useState } from 'react';
 import type { Dispatch } from 'redux';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/actions/practice/practiceActionsSettings';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
 import store from '../../../../../../../redux/store';
+import createDeepCopy from '../../../../../../../utility/functions/createDeepCopy';
 import displayAlert from '../../../../../../../utility/functions/displayAlert';
+import type { IPracticeCustomText } from '../../../../../../../utility/types/practice';
 import BootstrapButton from '../../../../../../Bootstrap/Button/BootstrapButton';
 import './PracticeSettingsAdvancedItemCustomText.css';
 
@@ -20,12 +21,10 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
   const [name, setName] = useState(props.name);
   const [content, setContent] = useState(props.content);
   const customTextActive = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.customTextActive,
+    (state) => state.practice.settings.current.customTextActive,
   );
   const customTexts = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config.customTexts,
+    (state) => state.practice.settings.current.customTexts,
   );
   const prevContent = useRef(content);
   const nameLength = useRef(name.length);
@@ -68,8 +67,7 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
             handleTextDeleteButtonClick(
               props.name,
               customTexts,
-              store.getState().practice.settings.currentConfig.basic.config
-                .customTextActive,
+              store.getState().practice.settings.current.customTextActive,
               dispatch,
             );
           }}
@@ -172,7 +170,6 @@ function handleTextNameInputBlur(
   if (currentActiveText === currentName) {
     dispatch(
       actionCreatorPracticeSettingsCurrentConfigUpdate({
-        category: 'basic',
         name: 'customTextActive',
         value: newNameCandidate,
       }),
@@ -202,7 +199,6 @@ function updateCustomTextsToReflectTextNameChange(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'advanced',
       name: 'customTexts',
       value: updatedCustomTexts,
     }),
@@ -221,7 +217,6 @@ function handleTextDeleteButtonClick(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'advanced',
       name: 'customTexts',
       value: updatedCustomTexts,
     }),
@@ -230,7 +225,6 @@ function handleTextDeleteButtonClick(
   if (currentActiveText === textToDeleteName) {
     dispatch(
       actionCreatorPracticeSettingsCurrentConfigUpdate({
-        category: 'basic',
         name: 'customTextActive',
         value: null,
       }),
@@ -267,7 +261,6 @@ function handleTextContentInputBlur(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'advanced',
       name: 'customTexts',
       value: updatedTexts,
     }),

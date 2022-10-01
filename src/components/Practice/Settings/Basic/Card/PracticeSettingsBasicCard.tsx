@@ -1,13 +1,13 @@
-import type { PracticeSettingNameBasic } from 'keycap-foundation';
 import React, { ReactNode } from 'react';
-import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/settings';
+import type { PracticeSettingName } from '../../../../../utility/types/practice';
 import BootstrapCard from '../../../../Bootstrap/Card/BootstrapCard';
 import './PracticeSettingsBasicCard.css';
 
 interface IProps {
   children: ReactNode;
-  name: PracticeSettingNameBasic;
+  name: PracticeSettingName;
   title: ReactNode;
 }
 
@@ -27,10 +27,10 @@ function Title({
   name,
 }: {
   content: ReactNode;
-  name: PracticeSettingNameBasic;
+  name: PracticeSettingName;
 }) {
   const pinnedSettings = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.pinned,
+    (state) => state.practice.settings.pinned,
   );
   const isPinned = pinnedSettings.includes(name);
   const dispatch = useAppDispatch();
@@ -53,7 +53,6 @@ function Title({
           dispatch(
             actionCreatorPracticeSettingsCurrentConfigPinnedUpdate({
               action: isPinned ? 'unpin' : 'pin',
-              category: 'basic',
               name: name,
             }),
           );

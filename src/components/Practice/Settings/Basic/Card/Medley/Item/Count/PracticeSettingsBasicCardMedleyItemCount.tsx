@@ -1,6 +1,6 @@
-import { PRACTICE_SETTINGS_MEDLEY_ITEM_COUNT_LIMITS } from 'keycap-foundation';
 import React from 'react';
 import { useAppSelector } from '../../../../../../../../redux/hooks';
+import { PRACTICE_SETTINGS_MEDLEY_ITEM_COUNT_LIMITS } from '../../../../../../../../utility/constants';
 import PracticeSettingsBasicCardInputNumber from '../../../Input/Number/PracticeSettingsBasicCardInputNumber';
 import PracticeSettingsBasicCard from '../../../PracticeSettingsBasicCard';
 
@@ -25,8 +25,7 @@ export default function PracticeSettingsBasicCardMedleyItemCount() {
 
 function Input() {
   const medleyItemCount = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.medleyItemCount,
+    (state) => state.practice.settings.current.medleyItemCount,
   );
 
   return (

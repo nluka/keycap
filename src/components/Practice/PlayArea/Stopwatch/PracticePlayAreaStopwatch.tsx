@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '../../../../redux/hooks';
 import store from '../../../../redux/store';
-import { PracticeStatus } from '../../../../redux/types/IStatePractice';
+import { PracticeStatus } from '../../../../redux/types';
 import getSecondsElapsed from '../../../../utility/functions/getSecondsElapsed';
 import { getTimeElapsedText } from '../../../../utility/functions/getTimeElapsedText';
 import { getTimeString } from './getTimeString';

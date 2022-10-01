@@ -1,14 +1,14 @@
-import type { IPracticeSettings } from 'keycap-foundation';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../resources/medley_collections/default-collections';
+import type { IPracticeConfig } from '../utility/types/practice';
 import practiceCreateMedleyCollectionNameToItemsMap from './practiceCreateMedleyCollectionNameToItemsMap';
 
 export default function practiceMedleyGetCollectionItems(
   collectionName: string,
-  settings: IPracticeSettings,
+  config: IPracticeConfig,
 ) {
   const [activeCollections, customCollections] = [
-    settings.currentConfig.basic.config.medleyCollectionsActive,
-    settings.currentConfig.advanced.config.medleyCollectionsCustom,
+    config.medleyCollectionsActive,
+    config.medleyCollectionsCustom,
   ];
 
   const definedCollections = [

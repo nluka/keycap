@@ -13,8 +13,7 @@ export default function PracticeSettingsBasicCardCountdownLength() {
 
 function Input() {
   const countdownLength = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.countdownLength,
+    (state) => state.practice.settings.current.countdownLength,
   );
 
   return (

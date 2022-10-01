@@ -1,6 +1,6 @@
-import { PRACTICE_SETTINGS_CARET_DELAY_LIMITS } from 'keycap-foundation';
 import React from 'react';
 import { useAppSelector } from '../../../../../../redux/hooks';
+import { PRACTICE_SETTINGS_CARET_DELAY_LIMITS } from '../../../../../../utility/constants';
 import PracticeSettingsBasicCardInputNumber from '../Input/Number/PracticeSettingsBasicCardInputNumber';
 import PracticeSettingsBasicCard from '../PracticeSettingsBasicCard';
 
@@ -23,7 +23,7 @@ export default function PracticeSettingsBasicCardCaretDelay() {
 
 function Input() {
   const caretDelay = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.caretDelay,
+    (state) => state.practice.settings.current.caretDelay,
   );
 
   return (

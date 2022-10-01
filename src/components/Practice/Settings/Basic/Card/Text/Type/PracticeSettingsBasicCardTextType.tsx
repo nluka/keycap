@@ -13,7 +13,7 @@ export default function PracticeSettingsBasicCardTextType() {
 
 function Input() {
   const textType = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.textType,
+    (state) => state.practice.settings.current.textType,
   );
 
   return (

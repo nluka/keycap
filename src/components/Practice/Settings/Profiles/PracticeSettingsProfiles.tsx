@@ -1,15 +1,16 @@
-import { createDeepCopy, IPracticeSettings } from 'keycap-foundation';
 import React, { useRef, useState } from 'react';
 import { v4 } from 'uuid';
-import localStorageItems from '../../../../local-storage';
+import storage from '../../../../local-storage';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import {
   actionCreatorPracticeSettingsProfileLoad,
   actionCreatorPracticeSettingsProfileSave,
   actionCreatorPracticeSettingsReplace,
-} from '../../../../redux/actions/practice/practiceActionsSettings';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+} from '../../../../redux/settings';
 import store from '../../../../redux/store';
+import createDeepCopy from '../../../../utility/functions/createDeepCopy';
 import displayAlert from '../../../../utility/functions/displayAlert';
+import type { IPracticeSettings } from '../../../../utility/types/practice';
 import BootstrapButton from '../../../Bootstrap/Button/BootstrapButton';
 import BootstrapCard from '../../../Bootstrap/Card/BootstrapCard';
 import Panel from '../../../Panel/Panel';
@@ -23,7 +24,7 @@ export default function PracticeSettingsProfiles() {
   return (
     <Panel
       collapseLocalStorageKey={
-        localStorageItems.isPanelCollapsedPracticeSettingsProfiles
+        storage.items.isPanelCollapsedPracticeSettingsProfiles
       }
       heading="Profiles"
       id="practiceSettingsProfiles"
@@ -133,15 +134,15 @@ function Profile(props: IProfileProps) {
           classes="px-2 py-1"
           isOutline={true}
           onClick={() => {
-            const choice = confirm(
-              `Are you sure you want to override your current settings with '${name}'?`,
-            );
-            if (!choice) {
-              return;
+            if (
+              confirm(
+                `Are you sure you want to override your current settings with '${name}'?`,
+              )
+            ) {
+              dispatch(
+                actionCreatorPracticeSettingsProfileLoad({ profileName: name }),
+              );
             }
-            dispatch(
-              actionCreatorPracticeSettingsProfileLoad({ profileName: name }),
-            );
           }}
           theme="secondary"
           title={`Click to load settings from '${name}'`}
@@ -152,15 +153,15 @@ function Profile(props: IProfileProps) {
           classes="px-2 py-1"
           isOutline={true}
           onClick={() => {
-            const choice = confirm(
-              `Are you sure you want to override '${name}' with your current settings?`,
-            );
-            if (!choice) {
-              return;
+            if (
+              confirm(
+                `Are you sure you want to override '${name}' with your current settings?`,
+              )
+            ) {
+              dispatch(
+                actionCreatorPracticeSettingsProfileSave({ profileName: name }),
+              );
             }
-            dispatch(
-              actionCreatorPracticeSettingsProfileSave({ profileName: name }),
-            );
           }}
           theme="secondary"
           title={`Click to save your current settings into '${name}'`}
@@ -213,7 +214,7 @@ function AddProfileButton() {
 
         updatedSettings.profiles.push({
           name: getStartingName(),
-          config: currentSettings.currentConfig,
+          config: currentSettings.current,
         });
         dispatch(
           actionCreatorPracticeSettingsReplace({ settings: updatedSettings }),

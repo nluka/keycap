@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 } from 'uuid';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/settings';
 import BootstrapButton from '../../../../../Bootstrap/Button/BootstrapButton';
 import PracticeSettingsAdvancedItem from '../PracticeSettingsAdvancedItem';
 import './PracticeSettingsAdvancedItemCustomTextsContainer.css';
@@ -9,8 +9,7 @@ import PracticeSettingsAdvancedItemCustomText from './Text/PracticeSettingsAdvan
 
 export default function PracticeSettingsAdvancedItemCustomTextsContainer() {
   const customTexts = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config.customTexts,
+    (state) => state.practice.settings.current.customTexts,
   );
 
   return (
@@ -37,8 +36,7 @@ export default function PracticeSettingsAdvancedItemCustomTextsContainer() {
 
 function AddTextButton() {
   const customTexts = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config.customTexts,
+    (state) => state.practice.settings.current.customTexts,
   );
   const dispatch = useAppDispatch();
 
@@ -63,7 +61,6 @@ function AddTextButton() {
         }
         dispatch(
           actionCreatorPracticeSettingsCurrentConfigUpdate({
-            category: 'advanced',
             name: 'customTexts',
             value: [
               ...customTexts,

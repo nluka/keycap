@@ -2,7 +2,7 @@ import type {
   IActionPracticeRoundCountdownSetInterval,
   IActionPracticeRoundCountdownStart,
   IActionPracticeRoundCountdownTick,
-} from './practiceActionsCountdown';
+} from './countdown';
 import type {
   IActionPracticeRoundAbort,
   IActionPracticeRoundEnd,
@@ -11,14 +11,12 @@ import type {
   IActionPracticeRoundTextGenerationStart,
   IActionPracticeRoundTextGenerationSuccess,
   IActionPracticeRoundUpdate,
-} from './practiceActionsRound';
+} from './round';
 import type {
-  IActionPracticeSettingsAdvancedPin,
-  IActionPracticeSettingsAdvancedUnpin,
-  IActionPracticeSettingsBasicPin,
-  IActionPracticeSettingsBasicUnpin,
+  IActionPracticeSettingsUnpin,
   IActionPracticeSettingsReplace,
-} from './practiceActionsSettings';
+  IActionPracticeSettingsPin,
+} from './settings';
 
 type PracticeActions =
   | IActionPracticeRoundTextGenerationStart
@@ -32,9 +30,7 @@ type PracticeActions =
   | IActionPracticeRoundAbort
   | IActionPracticeRoundUpdate
   | IActionPracticeSettingsReplace
-  | IActionPracticeSettingsBasicPin
-  | IActionPracticeSettingsBasicUnpin
-  | IActionPracticeSettingsAdvancedPin
-  | IActionPracticeSettingsAdvancedUnpin;
+  | IActionPracticeSettingsPin
+  | IActionPracticeSettingsUnpin;
 
 export default PracticeActions;

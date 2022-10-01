@@ -13,7 +13,7 @@ export default function PracticeSettingsBasicCardCaretStyle() {
 
 function Input() {
   const caretStyle = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.caretStyle,
+    (state) => state.practice.settings.current.caretStyle,
   );
 
   return (

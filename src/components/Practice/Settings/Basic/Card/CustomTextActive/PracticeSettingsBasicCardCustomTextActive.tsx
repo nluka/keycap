@@ -24,12 +24,10 @@ export default function PracticeSettingsBasicCardCustomTextActive() {
 
 function Input() {
   const customTexts = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config.customTexts,
+    (state) => state.practice.settings.current.customTexts,
   );
   const customTextActive = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.customTextActive,
+    (state) => state.practice.settings.current.customTextActive,
   );
   const textNames = customTexts.map((text) => text.name);
 

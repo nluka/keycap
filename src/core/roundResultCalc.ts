@@ -1,5 +1,6 @@
-import type { IPracticeRoundResult, Time } from 'keycap-foundation';
 import getMinutesElapsed from '../utility/functions/getMinutesElapsed';
+import type { IPracticeRoundResult } from '../utility/types/practice';
+import type Time from '../utility/types/Time';
 import { CHARACTERS_PER_WORD } from './constants';
 import roundResultCalcAccuracyPercentage from './roundResultCalcAccuracyPercentage';
 import roundResultCalcNetWordsPerMinute from './roundResultCalcNetWordsPerMinute';

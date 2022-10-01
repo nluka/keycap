@@ -1,6 +1,6 @@
-import type { PracticeSettingNameBasic } from 'keycap-foundation';
 import React from 'react';
 import { v4 } from 'uuid';
+import type { PracticeSettingName } from '../../../../../utility/types/practice';
 import PracticeSettingsBasicCardCaretDelay from './Caret/PracticeSettingsBasicCardCaretDelay';
 import PracticeSettingsBasicCardCaretStyle from './Caret/PracticeSettingsBasicCardCaretStyle';
 import PracticeSettingsBasicCardCountdownLength from './CountdownLength/PracticeSettingsBasicCardCountdownLength';
@@ -22,7 +22,7 @@ interface IPracticeSettingBasicCard {
 }
 
 const practiceSettingNameBasicToCardMap = new Map<
-  PracticeSettingNameBasic,
+  PracticeSettingName,
   IPracticeSettingBasicCard
 >([
   [

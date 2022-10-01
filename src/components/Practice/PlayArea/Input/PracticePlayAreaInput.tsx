@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import {
   actionCreatorPracticeRoundAbort,
   actionCreatorPracticeRoundInit,
   actionCreatorPracticeRoundUpdate,
-} from '../../../../redux/actions/practice/practiceActionsRound';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { PracticeStatus } from '../../../../redux/types/IStatePractice';
+} from '../../../../redux/round';
+import { PracticeStatus } from '../../../../redux/types';
 import replaceControlCharsWithVisibleChars from '../../../../utility/functions/replaceControlCharsWithVisibleChars';
 import './PracticePlayAreaInput.css';
 

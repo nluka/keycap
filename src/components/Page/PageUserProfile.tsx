@@ -1,15 +1,11 @@
 import React from 'react';
-import { useAppSelector } from '../../redux/hooks';
 import BootstrapGridColumn from '../Bootstrap/Grid/Column/BootstrapGridColumn';
 import BootstrapGridContainer from '../Bootstrap/Grid/Container/BootstrapGridContainer';
 import BootstrapGridRow from '../Bootstrap/Grid/Row/BootstrapGridRow';
-import ProfileDangerZone from '../Profile/DangerZone/ProfileDangerZone';
 import ProfilePracticeStats from '../Profile/PracticeStats/ProfilePracticeStats';
 import Page from './Page';
 
 export default function PageUserProfile() {
-  const isUserSignedIn = useAppSelector((state) => state.user.isSignedIn);
-
   return (
     <Page title="keyCap | Profile">
       <BootstrapGridContainer breakpoints={['md']} classes="px-4">
@@ -22,14 +18,7 @@ export default function PageUserProfile() {
               <i className="bi bi-person"></i>
               <span>Profile</span>
             </h1>
-            {!isUserSignedIn ? (
-              <p className="text-norm m-0">Sign in to use this page.</p>
-            ) : (
-              <>
-                <ProfilePracticeStats />
-                <ProfileDangerZone />
-              </>
-            )}
+            <ProfilePracticeStats />
           </BootstrapGridColumn>
         </BootstrapGridRow>
       </BootstrapGridContainer>

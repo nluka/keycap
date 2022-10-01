@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import {
   actionCreatorPracticeRoundAbort,
   actionCreatorPracticeRoundInit,
-} from '../../../../redux/actions/practice/practiceActionsRound';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { PracticeStatus } from '../../../../redux/types/IStatePractice';
+} from '../../../../redux/round';
+import { PracticeStatus } from '../../../../redux/types';
 import BootstrapButton from '../../../Bootstrap/Button/BootstrapButton';
 import './PracticePlayAreaActionButton.css';
 

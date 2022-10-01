@@ -1,5 +1,7 @@
-import { PRACTICE_SETTINGS_SOUND_VOLUME_LIMITS } from 'keycap-foundation';
-import { INFO_MESSAGE_STYLES } from './utility/constants';
+import {
+  INFO_MESSAGE_STYLES,
+  PRACTICE_SETTINGS_SOUND_VOLUME_LIMITS,
+} from './utility/constants';
 
 const audioContext = new AudioContext();
 const soundNameToAudioBufferMap = new Map<SoundName, AudioBuffer>();
@@ -7,32 +9,30 @@ const soundNameToAudioBufferMap = new Map<SoundName, AudioBuffer>();
 export enum SoundName {
   countdownBeepShort = 'countdown-beep-short',
   countdownBeepLong = 'countdown-beep-long',
-  roundCompletion = 'round-completion',
 }
 
 (function initAudioNameToBufferMap() {
+  async function initSound(name: SoundName) {
+    fetch(`/audio/${name}.mp3`)
+      .then(async (res) => {
+        const arrayBuffer = await res.arrayBuffer();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        soundNameToAudioBufferMap.set(name, audioBuffer);
+        console.log(
+          `%cFetched and loaded sound file ${JSON.stringify(name)}`,
+          INFO_MESSAGE_STYLES,
+        );
+      })
+      .catch(() => {
+        console.error(`Failed to fetch sound ${JSON.stringify(name)}`);
+      });
+  }
+
   initSound(SoundName.countdownBeepShort);
   initSound(SoundName.countdownBeepLong);
-  initSound(SoundName.roundCompletion);
 })();
 
-async function initSound(name: SoundName) {
-  fetch(`/audio/${name}.mp3`)
-    .then(async (res) => {
-      const arrayBuffer = await res.arrayBuffer();
-      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-      soundNameToAudioBufferMap.set(name, audioBuffer);
-      console.log(
-        `%cFetched and loaded sound file ${JSON.stringify(name)}`,
-        INFO_MESSAGE_STYLES,
-      );
-    })
-    .catch(() => {
-      console.error(`Failed to fetch sound ${JSON.stringify(name)}`);
-    });
-}
-
-export default function playSound(name: SoundName, volume: number) {
+export function playSound(name: SoundName, volume: number) {
   if (volume === 0) {
     return;
   }

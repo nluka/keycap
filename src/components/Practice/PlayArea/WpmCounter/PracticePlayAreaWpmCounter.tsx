@@ -4,7 +4,7 @@ import roundResultCalcNetWordsPerMinute from '../../../../core/roundResultCalcNe
 import roundTextCalcCorrectCharsCount from '../../../../core/roundTextCalcCorrectCharsCount';
 import { useAppSelector } from '../../../../redux/hooks';
 import store from '../../../../redux/store';
-import { PracticeStatus } from '../../../../redux/types/IStatePractice';
+import { PracticeStatus } from '../../../../redux/types';
 import getMinutesElapsed from '../../../../utility/functions/getMinutesElapsed';
 import './PracticePlayAreaWpmCounter.css';
 

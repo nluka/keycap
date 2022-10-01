@@ -1,14 +1,14 @@
-import type { PracticeSettingNameAdvanced } from 'keycap-foundation';
 import React, { ReactNode } from 'react';
-import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/settings';
 import { SPACE } from '../../../../../utility/constants';
+import type { PracticeSettingName } from '../../../../../utility/types/practice';
 import './PracticeSettingsAdvancedItem.css';
 
 interface IProps {
   children: ReactNode;
   classes?: string;
-  name: PracticeSettingNameAdvanced;
+  name: PracticeSettingName;
   title: string;
 }
 
@@ -31,11 +31,11 @@ export default function PracticeSettingsAdvancedItem(props: IProps) {
 
 interface ITitleProps {
   content: string;
-  name: PracticeSettingNameAdvanced;
+  name: PracticeSettingName;
 }
 function Title(props: ITitleProps) {
   const pinnedSettings = useAppSelector(
-    (state) => state.practice.settings.currentConfig.advanced.pinned,
+    (state) => state.practice.settings.pinned,
   );
   const isPinned = pinnedSettings.includes(props.name);
   const dispatch = useAppDispatch();
@@ -49,7 +49,6 @@ function Title(props: ITitleProps) {
           dispatch(
             actionCreatorPracticeSettingsCurrentConfigPinnedUpdate({
               action: isPinned ? 'unpin' : 'pin',
-              category: 'advanced',
               name: props.name,
             }),
           )

@@ -22,9 +22,7 @@ export default function PracticeSettingsBasicCardIsResultRecordingEnabled() {
 
 function Input() {
   const isResultRecordingEnabled = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config
-        .isResultRecordingEnabled,
+    (state) => state.practice.settings.current.isResultRecordingEnabled,
   );
 
   return (

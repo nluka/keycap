@@ -1,9 +1,9 @@
-import type { PracticeSettingName } from 'keycap-foundation';
 import React from 'react';
 import { v4 } from 'uuid';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
 import convertWordArrayToCamelCaseString from '../../../../../../../utility/functions/convertWordArrayToCamelCaseString';
+import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 import './PracticeSettingsBasicCardInputRadio.css';
 
 interface IProps {
@@ -69,7 +69,6 @@ function Option({
         onClick={() => {
           dispatch(
             actionCreatorPracticeSettingsCurrentConfigUpdate({
-              category: 'basic',
               name,
               value,
             }),

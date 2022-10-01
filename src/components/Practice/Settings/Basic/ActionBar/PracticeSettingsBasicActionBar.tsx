@@ -1,5 +1,5 @@
 import React from 'react';
-import localStorageItems from '../../../../../local-storage';
+import storage from '../../../../../local-storage';
 import BootstrapButton from '../../../../Bootstrap/Button/BootstrapButton';
 
 interface IProps {
@@ -28,7 +28,7 @@ export default function PracticeSettingsBasicActionBar(props: IProps) {
             const newBool = !onlyShowPinned;
             setOnlyShowPinned(newBool);
             localStorage.setItem(
-              localStorageItems.onlyShowPinnedPracticeSettingsBasic,
+              storage.items.onlyShowPinnedPracticeSettingsBasic,
               `${newBool}`,
             );
           }}

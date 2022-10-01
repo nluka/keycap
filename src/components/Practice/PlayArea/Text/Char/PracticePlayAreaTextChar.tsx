@@ -1,8 +1,8 @@
-import type { PracticeMistakeHighlightStyle } from 'keycap-foundation';
 import React from 'react';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { SPACE } from '../../../../../utility/constants';
 import './PracticePlayAreaTextChar.css';
+import type { PracticeMistakeHighlightStyle } from '../../../../../utility/types/practice';
 
 interface IProps {
   actual: string;
@@ -12,30 +12,31 @@ interface IProps {
 
 const PracticePlayAreaTextChar = React.memo((props: IProps) => {
   const caretStyle = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.caretStyle,
+    (state) => state.practice.settings.current.caretStyle,
   );
   const caretDelay = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.caretDelay,
+    (state) => state.practice.settings.current.caretDelay,
   );
   const mistakeHighlightStyle = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.mistakeHighlightStyle,
+    (state) => state.practice.settings.current.mistakeHighlightStyle,
   );
 
   return (
-    <span
-      className="char"
-      data-caret={props.hasCaret ? caretStyle : null}
-      data-caret-delay={props.hasCaret ? caretDelay : null}
-      data-correct={getDataCorrect(props)}
-      data-mistake-highlight-style={getDataMistakeHighlightStyle(
-        props,
-        mistakeHighlightStyle,
-      )}
-      data-space={getDataSpace(props)}
-    >
-      {props.actual}
-    </span>
+    <>
+      <span
+        className="char"
+        data-caret={props.hasCaret ? caretStyle : null}
+        data-caret-delay={props.hasCaret ? caretDelay : null}
+        data-correct={getDataCorrect(props)}
+        data-mistake-highlight-style={getDataMistakeHighlightStyle(
+          props,
+          mistakeHighlightStyle,
+        )}
+        data-space={getDataSpace(props)}
+      >
+        {props.actual}
+      </span>
+    </>
   );
 });
 

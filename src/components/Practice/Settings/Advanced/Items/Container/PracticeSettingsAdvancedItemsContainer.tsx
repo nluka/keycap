@@ -11,7 +11,7 @@ interface IProps {
 
 export default function PracticeSettingsAdvancedItemsContainer(props: IProps) {
   const pinnedSettings = useAppSelector(
-    (state) => state.practice.settings.currentConfig.advanced.pinned,
+    (state) => state.practice.settings.pinned,
     shallowEqual,
   );
 

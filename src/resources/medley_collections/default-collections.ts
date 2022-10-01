@@ -1,4 +1,4 @@
-import type { IPracticeMedleyCollection } from 'keycap-foundation';
+import type { IPracticeMedleyCollection } from '../../utility/types/practice';
 import alphabet from './alphabet';
 import commonWords from './commonWords';
 import digits from './digits';

@@ -1,10 +1,13 @@
-import type { IPracticeSettings, PracticeTextType } from 'keycap-foundation';
 import { fetchRandQuote } from '../core/quotable';
+import type {
+  IPracticeConfig,
+  PracticeTextType,
+} from '../utility/types/practice';
 import processContent from './practiceContentProcess';
 import practiceMedleyGenerate from './practiceMedleyGenerate';
 
 type ContentGeneratorFunc = (
-  settings: IPracticeSettings,
+  config: IPracticeConfig,
 ) => string | Error | Promise<string | Error>;
 
 const textTypeToContentGeneratorFuncMap = new Map<
@@ -17,13 +20,11 @@ const textTypeToContentGeneratorFuncMap = new Map<
 ]);
 
 /**
- * @param settings The config to use for content generation.
+ * @param config The config to use for content generation.
  * @returns Generated content string corresponding to the config provided in `settings`, or an error if content cannot be generated.
  */
-export default async function practiceContentGenerate(
-  settings: IPracticeSettings,
-) {
-  const textType = settings.currentConfig.basic.config.textType;
+export default async function practiceContentGenerate(config: IPracticeConfig) {
+  const textType = config.textType;
   const contentGeneratorFunc = textTypeToContentGeneratorFuncMap.get(textType);
   if (contentGeneratorFunc === undefined) {
     throw new Error(
@@ -31,35 +32,33 @@ export default async function practiceContentGenerate(
     );
   }
 
-  const content = await contentGeneratorFunc(settings);
+  const content = await contentGeneratorFunc(config);
 
-  return content instanceof Error
-    ? content
-    : processContent(content, settings.currentConfig.basic.config);
+  return content instanceof Error ? content : processContent(content, config);
 }
 
-async function generateQuote(settings: IPracticeSettings) {
+async function generateQuote(config: IPracticeConfig) {
   const content = await fetchRandQuote(
-    {
-      minLength: settings.currentConfig.basic.config.quoteLength.min,
-      maxLength: settings.currentConfig.basic.config.quoteLength.max,
-    },
-    settings.currentConfig.basic.config,
+    // {
+    //   minLength: config.quoteLength.min,
+    //   maxLength: config.quoteLength.max,
+    // },
+    config,
   );
   return content instanceof Error
     ? new Error(`Failed to generate quote: ${content.message}`)
     : content;
 }
 
-function generateCustom(settings: IPracticeSettings) {
-  const activeText = settings.currentConfig.basic.config.customTextActive;
+function generateCustom(config: IPracticeConfig) {
+  const activeText = config.customTextActive;
   if (activeText === null) {
     return new Error(
       `Failed to generate a custom text: active text hasn't been selected.`,
     );
   }
 
-  const customTexts = settings.currentConfig.advanced.config.customTexts;
+  const customTexts = config.customTexts;
   const customTextIndex = customTexts.findIndex(
     (text) => text.name === activeText,
   );

@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { createDeepCopy } from 'keycap-foundation';
+import createDeepCopy from '../../utility/functions/createDeepCopy';
 import roundTextCreate from '../roundTextCreate';
 import roundTextUpdate from '../roundTextUpdate';
 import type IRoundText from '../types/IRoundText';

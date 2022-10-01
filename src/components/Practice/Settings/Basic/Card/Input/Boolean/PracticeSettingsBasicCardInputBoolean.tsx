@@ -1,7 +1,7 @@
-import type { PracticeSettingName } from 'keycap-foundation';
 import React, { useRef } from 'react';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 import './PracticeSettingsBasicCardInputBoolean.css';
 
 interface IProps {
@@ -25,7 +25,6 @@ export default function PracticeSettingsBasicCardInputBoolean(props: IProps) {
         onChange={() =>
           dispatch(
             actionCreatorPracticeSettingsCurrentConfigUpdate({
-              category: 'basic',
               name: props.name,
               value: !props.value,
             }),

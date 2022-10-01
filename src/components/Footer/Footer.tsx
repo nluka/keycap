@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="text-center text-low p-4">
       <p className="m-0">
-        Copyright &copy; 2021{' '}
+        Copyright &copy; 2022{' '}
         <a
           className="text-low"
           href="https://www.linkedin.com/in/nicholas-lukasevich/"

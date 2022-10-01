@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../../redux/actions/practice/practiceActionsSettings';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../../redux/settings';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../../../../../../../resources/medley_collections/default-collections';
 import PracticeSettingsBasicCard from '../../../PracticeSettingsBasicCard';
 import getValidCollections from './getValidCollections';
@@ -21,14 +21,10 @@ export default function PracticeSettingsBasicCardMedleyCollectionsActive() {
 
 function Input() {
   const medleyCollectionsActive = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config
-        .medleyCollectionsActive,
+    (state) => state.practice.settings.current.medleyCollectionsActive,
   );
   const medleyCollectionsCustom = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config
-        .medleyCollectionsCustom,
+    (state) => state.practice.settings.current.medleyCollectionsCustom,
   );
   const [value, setValue] = useState(medleyCollectionsActive.join(', '));
   const previousValue = useRef(value);
@@ -60,7 +56,6 @@ function Input() {
         ]);
         dispatch(
           actionCreatorPracticeSettingsCurrentConfigUpdate({
-            category: 'basic',
             name: 'medleyCollectionsActive',
             value: validCollections,
           }),

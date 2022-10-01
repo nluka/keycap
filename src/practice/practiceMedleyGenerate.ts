@@ -1,17 +1,14 @@
-import type {
-  IPracticeSettings,
-  IPracticeSettingsConfigBasic,
-} from 'keycap-foundation';
 import { SPACE } from '../utility/constants';
 import capitalizeFirstChar from '../utility/functions/capitalizeFirstChar';
 import getRandArrayElement from '../utility/functions/getRandArrayElement';
 import probability from '../utility/functions/probability';
+import type { IPracticeConfig } from '../utility/types/practice';
 import practiceMedleyGetCollectionItems from './practiceMedleyGetCollectionItems';
 
-export default function practiceMedleyGenerate(settings: IPracticeSettings) {
+export default function practiceMedleyGenerate(config: IPracticeConfig) {
   const [activeCollections, itemCount] = [
-    settings.currentConfig.basic.config.medleyCollectionsActive,
-    settings.currentConfig.basic.config.medleyItemCount,
+    config.medleyCollectionsActive,
+    config.medleyItemCount,
   ];
 
   if (activeCollections.length === 0) {
@@ -21,7 +18,7 @@ export default function practiceMedleyGenerate(settings: IPracticeSettings) {
   }
 
   const areAllCollectionsEmpty = activeCollections.every((collection) => {
-    const items = practiceMedleyGetCollectionItems(collection, settings);
+    const items = practiceMedleyGetCollectionItems(collection, config);
     return items?.length === 0;
   });
   if (areAllCollectionsEmpty) {
@@ -35,32 +32,23 @@ export default function practiceMedleyGenerate(settings: IPracticeSettings) {
   for (let i = 0; i < itemCount; ++i) {
     const randCollection = getRandArrayElement(activeCollections);
     const randItem = getRandArrayElement<string>(
-      practiceMedleyGetCollectionItems(randCollection, settings) || [],
+      practiceMedleyGetCollectionItems(randCollection, config) || [],
     );
     rawItems.push(randItem);
   }
 
-  const processedItems = processItems(
-    rawItems,
-    settings.currentConfig.basic.config,
-  );
+  const processedItems = processItems(rawItems, config);
 
   const rawMedleyStr = processedItems.join(SPACE);
 
-  const processedMedleyStr = processMedleyStr(
-    rawMedleyStr,
-    settings.currentConfig.basic.config,
-  );
+  const processedMedleyStr = processMedleyStr(rawMedleyStr, config);
 
   return processedMedleyStr;
 }
 
-function processItems(
-  items: string[],
-  basicConfig: IPracticeSettingsConfigBasic,
-) {
-  if (basicConfig.isPunctuationEnabled) {
-    items = addPunctuation(items, basicConfig.medleyPunctuationFrequency);
+function processItems(items: string[], config: IPracticeConfig) {
+  if (config.isPunctuationEnabled) {
+    items = addPunctuation(items, config.medleyPunctuationFrequency);
   }
   return items;
 }
@@ -120,14 +108,11 @@ function addDoubleQuotations(str: string) {
   return `"${str}"`;
 }
 
-function processMedleyStr(
-  str: string,
-  basicConfig: IPracticeSettingsConfigBasic,
-) {
+function processMedleyStr(str: string, config: IPracticeConfig) {
   str = str.replace(/[.?!] [a-z]/g, (match) => {
     return match.slice(0, 2) + match.charAt(2).toUpperCase();
   });
-  if (basicConfig.isPunctuationEnabled) {
+  if (config.isPunctuationEnabled) {
     str = capitalizeFirstChar(str);
     str = addSentenceTerminatorChar(str);
   }

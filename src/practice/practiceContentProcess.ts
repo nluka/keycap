@@ -1,10 +1,10 @@
-import type { IPracticeSettingsConfigBasic } from 'keycap-foundation';
+import type { IPracticeConfig } from '../utility/types/practice';
 
 export default function practiceContentProcess(
   content: string,
-  basicConfig: IPracticeSettingsConfigBasic,
+  config: IPracticeConfig,
 ) {
-  switch (basicConfig.textCasing) {
+  switch (config.textCasing) {
     case 'force-lower':
       return content.toLowerCase();
     case 'force-upper':

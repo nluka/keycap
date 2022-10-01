@@ -1,6 +1,6 @@
-import { PRACTICE_SETTINGS_MEDLEY_PUNCTUATION_FREQUENCY_LIMITS } from 'keycap-foundation';
 import React from 'react';
 import { useAppSelector } from '../../../../../../../redux/hooks';
+import { PRACTICE_SETTINGS_MEDLEY_PUNCTUATION_FREQUENCY_LIMITS } from '../../../../../../../utility/constants';
 import PracticeSettingsBasicCardInputNumber from '../../Input/Number/PracticeSettingsBasicCardInputNumber';
 import PracticeSettingsBasicCard from '../../PracticeSettingsBasicCard';
 
@@ -25,9 +25,7 @@ export default function PracticeSettingsBasicCardMedleyPunctuationFrequency() {
 
 function Input() {
   const medleyPunctuationFrequency = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config
-        .medleyPunctuationFrequency,
+    (state) => state.practice.settings.current.medleyPunctuationFrequency,
   );
 
   return (

@@ -12,7 +12,7 @@ interface IProps {
 
 export default function PracticeSettingsBasicCardsContainer(props: IProps) {
   const pinned = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.pinned,
+    (state) => state.practice.settings.pinned,
     shallowEqual,
   );
 

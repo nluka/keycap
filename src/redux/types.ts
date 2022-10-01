@@ -1,14 +1,18 @@
+import type IRoundText from '../core/types/IRoundText';
 import type {
   IPracticeRoundResult,
   IPracticeSettings,
-  Time,
-} from 'keycap-foundation';
-import type IRoundText from '../../core/types/IRoundText';
+} from '../utility/types/practice';
+import type Time from '../utility/types/Time';
 
-export default interface IStatePractice {
+export interface IStatePractice {
   playArea: IStatePracticePlayArea;
   roundResult: IPracticeRoundResult | null;
   settings: IPracticeSettings;
+}
+
+export interface IStateApp {
+  practice: IStatePractice;
 }
 
 export interface IStatePracticePlayArea {

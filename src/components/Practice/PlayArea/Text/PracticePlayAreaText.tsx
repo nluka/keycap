@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { v4 } from 'uuid';
-import { actionCreatorPracticeRoundEnd } from '../../../../redux/actions/practice/practiceActionsRound';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { actionCreatorPracticeRoundEnd } from '../../../../redux/round';
 import store from '../../../../redux/store';
-import { PracticeStatus } from '../../../../redux/types/IStatePractice';
+import { PracticeStatus } from '../../../../redux/types';
 import type { ISelectedChar } from '../PracticePlayArea';
 import PracticePlayAreaTextCharAnalyzed from './Char/Analyzed/PracticePlayAreaTextCharAnalyzed';
 import PracticePlayAreaTextChar from './Char/PracticePlayAreaTextChar';

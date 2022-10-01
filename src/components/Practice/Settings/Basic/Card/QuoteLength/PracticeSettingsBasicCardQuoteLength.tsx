@@ -1,10 +1,8 @@
-import {
-  convertNumberRangeToQuoteLength,
-  convertQuoteLengthToNumberRange,
-  PRACTICE_SETTINGS_QUOTE_LENGTH_LIMITS,
-} from 'keycap-foundation';
 import React from 'react';
 import { useAppSelector } from '../../../../../../redux/hooks';
+import { PRACTICE_SETTINGS_QUOTE_LENGTH_LIMITS } from '../../../../../../utility/constants';
+import convertNumberRangeToQuoteLength from '../../../../../../utility/functions/convertNumberRangeToQuoteLength';
+import convertQuoteLengthToNumberRange from '../../../../../../utility/functions/convertQuoteLengthToNumberRange';
 import PracticeSettingsBasicCardInputNumberRange from '../Input/NumberRange/PracticeSettingsBasicCardInputNumberRange';
 import PracticeSettingsBasicCard from '../PracticeSettingsBasicCard';
 
@@ -18,7 +16,7 @@ export default function PracticeSettingsBasicCardQuoteLength() {
 
 function Input() {
   const quoteLength = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.quoteLength,
+    (state) => state.practice.settings.current.quoteLength,
   );
 
   return (

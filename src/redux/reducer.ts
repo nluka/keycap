@@ -1,14 +1,14 @@
-import { createDeepCopy, DEFAULT_PRACTICE_SETTINGS } from 'keycap-foundation';
-import { roundResultCalc } from '../../core/roundResultCalc';
-import roundTextCalcPrevInputValue from '../../core/roundTextCalcPrevInputValue';
-import roundTextUpdate from '../../core/roundTextUpdate';
-import localStorageItems from '../../local-storage';
-import type PracticeActions from '../actions/practice/practiceActions';
+import { roundResultCalc } from '../core/roundResultCalc';
+import roundTextCalcPrevInputValue from '../core/roundTextCalcPrevInputValue';
+import roundTextUpdate from '../core/roundTextUpdate';
+import storage from '../local-storage';
+import createDeepCopy from '../utility/functions/createDeepCopy';
+import type PracticeActions from './actions';
 import {
   ACTION_TYPE_PRACTICE_ROUND_COUNTDOWN_SET_INTERVAL,
   ACTION_TYPE_PRACTICE_ROUND_COUNTDOWN_START,
   ACTION_TYPE_PRACTICE_ROUND_COUNTDOWN_TICK,
-} from '../actions/practice/practiceActionsCountdown';
+} from './countdown';
 import {
   ACTION_TYPE_PRACTICE_ROUND_ABORT,
   ACTION_TYPE_PRACTICE_ROUND_END,
@@ -17,16 +17,13 @@ import {
   ACTION_TYPE_PRACTICE_ROUND_TEXT_GENERATION_START,
   ACTION_TYPE_PRACTICE_ROUND_TEXT_GENERATION_SUCCESS,
   ACTION_TYPE_PRACTICE_ROUND_UPDATE,
-} from '../actions/practice/practiceActionsRound';
+} from './round';
 import {
-  ACTION_TYPE_PRACTICE_SETTINGS_ADVANCED_PIN,
-  ACTION_TYPE_PRACTICE_SETTINGS_ADVANCED_UNPIN,
-  ACTION_TYPE_PRACTICE_SETTINGS_BASIC_PIN,
-  ACTION_TYPE_PRACTICE_SETTINGS_BASIC_UNPIN,
+  ACTION_TYPE_PRACTICE_SETTINGS_PIN,
   ACTION_TYPE_PRACTICE_SETTINGS_REPLACE,
-} from '../actions/practice/practiceActionsSettings';
-import type IStatePractice from '../types/IStatePractice';
-import { PracticeRoundStopCode, PracticeStatus } from '../types/IStatePractice';
+  ACTION_TYPE_PRACTICE_SETTINGS_UNPIN,
+} from './settings';
+import { IStatePractice, PracticeRoundStopCode, PracticeStatus } from './types';
 
 const initialState: IStatePractice = {
   playArea: {
@@ -47,18 +44,8 @@ const initialState: IStatePractice = {
     input: '',
   },
   roundResult: null,
-  settings: getInitialSettings(),
+  settings: storage.getPracticeSettings(),
 };
-
-function getInitialSettings() {
-  const localStorageVal = localStorage.getItem(
-    localStorageItems.practiceSettings,
-  );
-  if (localStorageVal !== null) {
-    return JSON.parse(localStorageVal);
-  }
-  return DEFAULT_PRACTICE_SETTINGS;
-}
 
 export default function practiceReducer(
   state = initialState,
@@ -138,19 +125,11 @@ export default function practiceReducer(
     case ACTION_TYPE_PRACTICE_SETTINGS_REPLACE:
       newState.settings = action.payload.settings;
       break;
-    case ACTION_TYPE_PRACTICE_SETTINGS_BASIC_PIN:
-      newState.settings.currentConfig.basic.pinned.push(action.payload.name);
+    case ACTION_TYPE_PRACTICE_SETTINGS_PIN:
+      newState.settings.pinned.push(action.payload.name);
       break;
-    case ACTION_TYPE_PRACTICE_SETTINGS_BASIC_UNPIN: {
-      const pinned = newState.settings.currentConfig.basic.pinned;
-      pinned.splice(pinned.indexOf(action.payload.name), 1);
-      break;
-    }
-    case ACTION_TYPE_PRACTICE_SETTINGS_ADVANCED_PIN:
-      newState.settings.currentConfig.advanced.pinned.push(action.payload.name);
-      break;
-    case ACTION_TYPE_PRACTICE_SETTINGS_ADVANCED_UNPIN: {
-      const pinned = newState.settings.currentConfig.advanced.pinned;
+    case ACTION_TYPE_PRACTICE_SETTINGS_UNPIN: {
+      const pinned = newState.settings.pinned;
       pinned.splice(pinned.indexOf(action.payload.name), 1);
       break;
     }

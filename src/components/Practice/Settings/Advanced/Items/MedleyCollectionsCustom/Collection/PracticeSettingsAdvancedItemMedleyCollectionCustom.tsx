@@ -1,15 +1,16 @@
-import { createDeepCopy, IPracticeMedleyCollection } from 'keycap-foundation';
 import React, { useRef, useState } from 'react';
 import type { Dispatch } from 'redux';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/actions/practice/practiceActionsSettings';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
 import store from '../../../../../../../redux/store';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../../../../../../resources/medley_collections/default-collections';
 import { SPACE } from '../../../../../../../utility/constants';
+import createDeepCopy from '../../../../../../../utility/functions/createDeepCopy';
 import displayAlert from '../../../../../../../utility/functions/displayAlert';
+import type { IPracticeMedleyCollection } from '../../../../../../../utility/types/practice';
 import BootstrapButton from '../../../../../../Bootstrap/Button/BootstrapButton';
 import './PracticeSettingsAdvancedItemMedleyCollectionCustom.css';
 
@@ -22,14 +23,10 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
   const [name, setName] = useState(props.name);
   const [items, setItems] = useState(props.items.join(SPACE));
   const medleyCollectionsActive = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config
-        .medleyCollectionsActive,
+    (state) => state.practice.settings.current.medleyCollectionsActive,
   );
   const medleyCollectionsCustom = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.advanced.config
-        .medleyCollectionsCustom,
+    (state) => state.practice.settings.current.medleyCollectionsCustom,
   );
   const prevItems = useRef(items);
   const nameLength = useRef(name.length);
@@ -72,7 +69,7 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
             handleCollectionDeleteButtonClick(
               props.name,
               medleyCollectionsCustom,
-              store.getState().practice.settings.currentConfig.basic.config
+              store.getState().practice.settings.current
                 .medleyCollectionsActive,
               dispatch,
             );
@@ -221,7 +218,6 @@ function updateCustomCollectionsToReflectCollectionNameChange(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'advanced',
       name: 'medleyCollectionsCustom',
       value: updatedCustomCollections,
     }),
@@ -243,7 +239,6 @@ function updateActiveCollectionsToReflectCollectionNameChange(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'basic',
       name: 'medleyCollectionsActive',
       value: updatedActiveCollections,
     }),
@@ -265,14 +260,12 @@ function handleCollectionDeleteButtonClick(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'advanced',
       name: 'medleyCollectionsCustom',
       value: updatedCustomCollections,
     }),
   );
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'basic',
       name: 'medleyCollectionsActive',
       value: updatedActiveCollections,
     }),
@@ -320,7 +313,6 @@ function handleCollectionItemsInputBlur(
 
   dispatch(
     actionCreatorPracticeSettingsCurrentConfigUpdate({
-      category: 'advanced',
       name: 'medleyCollectionsCustom',
       value: updatedCollections,
     }),

@@ -1,19 +1,19 @@
-import axios from 'axios';
 import type { AnyAction } from 'redux';
 import type { ThunkAction } from 'redux-thunk';
-import roundTextCreate from '../../../core/roundTextCreate';
-import type IRoundText from '../../../core/types/IRoundText';
-import practiceContentGenerate from '../../../practice/practiceContentGenerate';
-import playSound, { SoundName } from '../../../sound';
-import type { RootState } from '../../store';
-import store from '../../store';
-import { PracticeStatus } from '../../types/IStatePractice';
-import { actionCreatorUserSignOut } from '../userActions';
+import roundTextCreate from '../core/roundTextCreate';
+import type IRoundText from '../core/types/IRoundText';
+import practiceContentGenerate from '../practice/practiceContentGenerate';
+import { playSound, SoundName } from '../sound';
+import type { RootState } from './store';
+import store from './store';
 import {
   _actionCreatorPracticeRoundCountdownSetInterval,
   _actionCreatorPracticeRoundCountdownStart,
   _actionCreatorPracticeRoundCountdownTick,
-} from './practiceActionsCountdown';
+} from './countdown';
+import { PracticeStatus } from './types';
+import storage from '../local-storage';
+import type { IPracticeRoundResult } from '../utility/types/practice';
 
 export function actionCreatorPracticeRoundInit(): ThunkAction<
   void,
@@ -22,10 +22,11 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
   AnyAction
 > {
   return async function (dispatch, getState) {
-    const settings = getState().practice.settings;
+    const config = getState().practice.settings.current;
 
     dispatch(_actionCreatorPracticeTextGenerationStart());
-    const content = await practiceContentGenerate(settings);
+    const content = await practiceContentGenerate(config);
+
     if (
       store.getState().practice.playArea.roundStatus !==
       PracticeStatus.generatingText
@@ -33,6 +34,7 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
       // Round was aborted during text generation
       return;
     }
+
     if (content instanceof Error) {
       dispatch(
         _actionCreatorPracticeRoundTextGenerationFailure({ error: content }),
@@ -55,16 +57,14 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
       return;
     }
 
-    const basicConfig = settings.currentConfig.basic.config;
-
-    if (basicConfig.countdownLength === 0) {
+    if (config.countdownLength === 0) {
       dispatch(_actionCreatorPracticeRoundStart());
       return;
     }
 
     dispatch(
       _actionCreatorPracticeRoundCountdownStart({
-        seconds: basicConfig.countdownLength,
+        seconds: config.countdownLength,
       }),
     );
 
@@ -72,8 +72,7 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
     const interval = setInterval(tick, 1000);
 
     function tick() {
-      const basicConfig =
-        getState().practice.settings.currentConfig.basic.config;
+      const config = getState().practice.settings.current;
       const secondsRemaining =
         getState().practice.playArea.countdown.secondsRemaining;
 
@@ -82,10 +81,10 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
           _actionCreatorPracticeRoundCountdownSetInterval({ interval: null }),
         );
         clearInterval(interval);
-        playSound(SoundName.countdownBeepLong, basicConfig.soundVolume);
+        playSound(SoundName.countdownBeepLong, config.soundVolume);
         dispatch(_actionCreatorPracticeRoundStart());
       } else {
-        playSound(SoundName.countdownBeepShort, basicConfig.soundVolume);
+        playSound(SoundName.countdownBeepShort, config.soundVolume);
       }
       dispatch(_actionCreatorPracticeRoundCountdownTick());
     }
@@ -122,27 +121,8 @@ export function actionCreatorPracticeRoundAbort(): ThunkAction<
 
     dispatch(_actionCreatorPracticeRoundAbort());
 
-    if (
-      !state.user.isSignedIn ||
-      state.user.token === null ||
-      !state.practice.settings.currentConfig.basic.config
-        .isResultRecordingEnabled
-    ) {
-      return;
-    }
-
-    try {
-      const res = await axios.post(
-        '/user/practice-stats/round-abortion',
-        null,
-        {
-          headers: { token: state.user.token },
-        },
-      );
-      console.log('Incremented rounds aborted', res);
-    } catch (err: any) {
-      console.error('Failed to increment rounds aborted', err.response);
-      dispatch(actionCreatorUserSignOut());
+    if (state.practice.settings.current.isResultRecordingEnabled) {
+      storage.addAbortedRound();
     }
   };
 }
@@ -185,35 +165,10 @@ export function actionCreatorPracticeRoundEnd(): ThunkAction<
 
     const state = getState();
 
-    playSound(
-      SoundName.roundCompletion,
-      state.practice.settings.currentConfig.basic.config.soundVolume,
-    );
-
-    if (
-      !state.user.isSignedIn ||
-      state.user.token === null ||
-      !state.practice.settings.currentConfig.basic.config
-        .isResultRecordingEnabled
-    ) {
-      return;
-    }
-
-    console.log(state.practice.roundResult);
-    try {
-      const res = await axios.post(
-        '/user/practice-stats/round-completion',
-        {
-          roundResult: state.practice.roundResult,
-        },
-        {
-          headers: { token: state.user.token },
-        },
+    if (state.practice.settings.current.isResultRecordingEnabled) {
+      storage.addCompletedRound(
+        state.practice.roundResult as IPracticeRoundResult,
       );
-      console.log('Round completion recorded', res);
-    } catch (err: any) {
-      console.error('Failed to record round completion', err.response);
-      dispatch(actionCreatorUserSignOut());
     }
   };
 }

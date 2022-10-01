@@ -1,13 +1,11 @@
-import {
-  createDeepCopy,
-  DEFAULT_PRACTICE_SETTINGS,
-  IPracticeSettings,
-} from 'keycap-foundation';
 import React from 'react';
-import localStorageItems from '../../../../local-storage';
-import { actionCreatorPracticeSettingsReplace } from '../../../../redux/actions/practice/practiceActionsSettings';
+import storage from '../../../../local-storage';
 import { useAppDispatch } from '../../../../redux/hooks';
+import { actionCreatorPracticeSettingsReplace } from '../../../../redux/settings';
 import store from '../../../../redux/store';
+import { DEFAULT_PRACTICE_SETTINGS } from '../../../../utility/constants';
+import createDeepCopy from '../../../../utility/functions/createDeepCopy';
+import type { IPracticeSettings } from '../../../../utility/types/practice';
 import BootstrapButton from '../../../Bootstrap/Button/BootstrapButton';
 import Panel from '../../../Panel/Panel';
 
@@ -16,7 +14,7 @@ export default function PracticeSettingsDangerZone() {
     <Panel
       classes="practice-settings"
       collapseLocalStorageKey={
-        localStorageItems.isPanelCollapsedPracticeSettingsDangerZone
+        storage.items.isPanelCollapsedPracticeSettingsDangerZone
       }
       heading="Danger Zone"
       id="practiceSettingsDangerZone"
@@ -45,8 +43,7 @@ function UnpinAll() {
             store.getState().practice.settings,
           ) as IPracticeSettings;
 
-          newSettings.currentConfig.basic.pinned = [];
-          newSettings.currentConfig.advanced.pinned = [];
+          newSettings.pinned = [];
 
           dispatch(
             actionCreatorPracticeSettingsReplace({

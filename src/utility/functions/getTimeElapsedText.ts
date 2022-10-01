@@ -1,4 +1,4 @@
-import type { Time } from 'keycap-foundation';
+import type Time from '../types/Time';
 
 export function getTimeElapsedText(timeElapsed: Time | null | undefined) {
   if (timeElapsed == null) {

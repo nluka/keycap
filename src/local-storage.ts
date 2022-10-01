@@ -1,13 +1,12 @@
-import {
-  DEFAULT_PRACTICE_SETTINGS,
-  IPracticeSettings,
-} from 'keycap-foundation';
+import { DEFAULT_PRACTICE_SETTINGS, DEFAULT_STATS } from './utility/constants';
 import parseBool from './utility/functions/parseBool';
+import type IStats from './utility/types/IStats';
+import type {
+  IPracticeRoundResult,
+  IPracticeSettings,
+} from './utility/types/practice';
 
-const localStorageItems = {
-  token: 'token',
-  username: 'username',
-  isAlertDisabledPracticeNotSignedIn: 'isAlertDisabledPracticeNotSignedIn',
+const items = {
   isPanelCollapsedPracticeSettingsProfiles:
     'isPanelCollapsedPracticeSettingsProfiles',
   isPanelCollapsedPracticeSettingsBasic:
@@ -16,7 +15,8 @@ const localStorageItems = {
     'isPanelCollapsedPracticeSettingsAdvanced',
   isPanelCollapsedPracticeSettingsDangerZone:
     'isPanelCollapsedPracticeSettingsDangerZone',
-  practiceSettings: 'practiceSettings_3', // Increment trailing number when any properties change
+  practiceSettings: 'practiceSettings',
+  stats: 'stats',
   onlyShowPinnedPracticeSettingsBasic: 'onlyShowPinnedPracticeSettingsBasic',
   onlyShowPinnedPracticeSettingsAdvanced:
     'onlyShowPinnedPracticeSettingsAdvanced',
@@ -24,63 +24,92 @@ const localStorageItems = {
   isPanelCollapsedProfilePracticeResults:
     'isPanelCollapsedProfilePracticeResults',
 };
+Object.freeze(items);
 
-export default localStorageItems;
-
-export function localStorageCleanAndFix() {
-  removeInvalidItems();
-  fixPracticeSettings();
-}
-
-function removeInvalidItems() {
-  for (let i = 0; i < localStorage.length; ++i) {
-    const item = localStorage.key(i);
-    if (item !== null && !isItemValid(item)) {
-      localStorage.removeItem(item);
-    }
+function getPracticeSettings() {
+  const settings = localStorage.getItem(items.practiceSettings);
+  if (settings === null) {
+    return DEFAULT_PRACTICE_SETTINGS;
+  } else {
+    return JSON.parse(settings) as IPracticeSettings;
   }
 }
 
-function isItemValid(item: string) {
-  return Object.prototype.hasOwnProperty.call(localStorageItems, item);
+function setPracticeSettings(settings: IPracticeSettings) {
+  localStorage.setItem(items.practiceSettings, JSON.stringify(settings));
 }
 
-function fixPracticeSettings() {
-  if (localStorage.getItem(localStorageItems.practiceSettings) === null) {
-    localStorage.setItem(
-      localStorageItems.practiceSettings,
-      JSON.stringify(DEFAULT_PRACTICE_SETTINGS),
-    );
+function getStats() {
+  const stats = localStorage.getItem(items.stats);
+  if (stats === null) {
+    return DEFAULT_STATS;
+  } else {
+    return JSON.parse(stats) as IStats;
   }
 }
 
-export function localStorageSetSignInItems(token: string, username: string) {
-  localStorage.setItem(localStorageItems.token, token);
-  localStorage.setItem(localStorageItems.username, username);
+function setStats(stats: IStats) {
+  localStorage.setItem(items.stats, JSON.stringify(stats));
 }
 
-export function localStorageRemoveSignInItems() {
-  localStorage.removeItem(localStorageItems.token);
-  localStorage.removeItem(localStorageItems.username);
+function resetStats() {
+  setStats(DEFAULT_STATS);
 }
 
-export function localStorageSetPracticeSettings(settings: IPracticeSettings) {
-  localStorage.setItem(
-    localStorageItems.practiceSettings,
-    JSON.stringify(settings),
-  );
+function addCompletedRound(result: IPracticeRoundResult) {
+  const stats = getStats();
+
+  if (stats.lastTenRoundResults.length >= 10) {
+    stats.lastTenRoundResults = stats.lastTenRoundResults.slice(1, 10);
+  }
+  stats.lastTenRoundResults.push(result);
+
+  stats.averageRoundResult.accuracyPercentage =
+    (stats.averageRoundResult.accuracyPercentage * stats.roundsCompletedCount +
+      result.accuracyPercentage) /
+    (stats.roundsCompletedCount + 1);
+
+  stats.averageRoundResult.netWordsPerMinute =
+    (stats.averageRoundResult.netWordsPerMinute * stats.roundsCompletedCount +
+      result.netWordsPerMinute) /
+    (stats.roundsCompletedCount + 1);
+
+  stats.averageRoundResult.timeElapsed =
+    (stats.averageRoundResult.timeElapsed * stats.roundsCompletedCount +
+      result.timeElapsed) /
+    (stats.roundsCompletedCount + 1);
+
+  ++stats.roundsCompletedCount;
+
+  setStats(stats);
 }
 
-export function localStorageGetBool(key: string) {
+function addAbortedRound() {
+  const stats = getStats();
+  ++stats.roundsAbortedCount;
+  setStats(stats);
+}
+
+function getBool(key: string) {
   const stored = localStorage.getItem(key);
   return stored !== null ? parseBool(stored) : false;
 }
 
-export function localStorageSetBool(key: string, value: boolean) {
+function setBool(key: string, value: boolean) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function localStorageGetUsername() {
-  const username = localStorage.getItem(localStorageItems.username);
-  return username !== null ? username : 'Unknown User';
-}
+const exports = {
+  items,
+  getPracticeSettings,
+  setPracticeSettings,
+  getStats,
+  setStats,
+  resetStats,
+  addCompletedRound,
+  addAbortedRound,
+  getBool,
+  setBool,
+};
+
+export default exports;

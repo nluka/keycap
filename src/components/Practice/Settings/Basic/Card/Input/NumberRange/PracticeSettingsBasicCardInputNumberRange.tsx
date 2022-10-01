@@ -1,8 +1,8 @@
-import type { PracticeSettingName } from 'keycap-foundation';
 import NumberRange from 'nluka-number-range';
 import React, { useEffect, useRef, useState } from 'react';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/actions/practice/practiceActionsSettings';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 import normalizeMaxValue from './normalizeMaxValue';
 import normalizeMinValue from './normalizeMinValue';
 import './PracticeSettingsBasicCardInputNumberRange.css';
@@ -36,7 +36,6 @@ export default function PracticeSettingsBasicCardInputNumberRange(
 
     dispatch(
       actionCreatorPracticeSettingsCurrentConfigUpdate({
-        category: 'basic',
         name: props.name,
         value,
       }),

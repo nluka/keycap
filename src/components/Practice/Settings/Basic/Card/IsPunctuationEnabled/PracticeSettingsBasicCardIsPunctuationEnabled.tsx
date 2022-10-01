@@ -13,8 +13,7 @@ export default function PracticeSettingsBasicCardIsPunctuationEnabled() {
 
 function Input() {
   const isPunctuationEnabled = useAppSelector(
-    (state) =>
-      state.practice.settings.currentConfig.basic.config.isPunctuationEnabled,
+    (state) => state.practice.settings.current.isPunctuationEnabled,
   );
 
   return (

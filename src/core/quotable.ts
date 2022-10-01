@@ -1,7 +1,7 @@
 import axios from 'axios';
-import type { IPracticeSettingsConfigBasic } from 'keycap-foundation';
 import HTTP_STATUS from 'nluka-http-response-status-codes';
 import getUrlWithAppendedQueryParams from '../utility/functions/getUrlWithAppendedQueryParams';
+import type { IPracticeConfig } from '../utility/types/practice';
 
 interface IQuoteableApiQuote {
   _id: string;
@@ -12,25 +12,25 @@ interface IQuoteableApiQuote {
   tags: string[];
 }
 
-interface IRandQuoteParams {
-  minLength?: number;
-  maxLength?: number;
-}
+// interface IRandQuoteParams {
+//   minLength?: number;
+//   maxLength?: number;
+// }
 
 export async function fetchRandQuote(
-  params: IRandQuoteParams = { minLength: undefined, maxLength: undefined },
-  basicConfig: IPracticeSettingsConfigBasic,
+  // params: IRandQuoteParams = { minLength: undefined, maxLength: undefined },
+  config: IPracticeConfig,
 ) {
   // API docs: https://github.com/lukePeavey/quotable
 
-  const url = getUrlWithAppendedQueryParams(
-    'https://api.quotable.io/random',
-    params,
-  );
+  const url = getUrlWithAppendedQueryParams('https://api.quotable.io/random', {
+    minLength: config.quoteLength.min,
+    maxLength: config.quoteLength.max,
+  });
 
   try {
     const quote: IQuoteableApiQuote = (await axios.get(url)).data;
-    const processedQuote = processQuote(quote.content, basicConfig);
+    const processedQuote = processQuote(quote.content, config);
     return processedQuote;
   } catch (err: any) {
     if (err.response === undefined) {
@@ -43,15 +43,12 @@ export async function fetchRandQuote(
   }
 }
 
-export function processQuote(
-  quote: string,
-  basicConfig: IPracticeSettingsConfigBasic,
-) {
+export function processQuote(quote: string, config: IPracticeConfig) {
   const punctuationRegex = /[.?!,:;\-–—[\]{}()'"]/g;
 
   quote = removeBadCharacters(quote);
 
-  if (!basicConfig.isPunctuationEnabled) {
+  if (!config.isPunctuationEnabled) {
     quote = quote.replace(punctuationRegex, '');
   }
 

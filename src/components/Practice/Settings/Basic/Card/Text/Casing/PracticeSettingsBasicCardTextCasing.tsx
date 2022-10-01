@@ -13,7 +13,7 @@ export default function PracticeSettingsBasicCardTextCasing() {
 
 function Input() {
   const textCasing = useAppSelector(
-    (state) => state.practice.settings.currentConfig.basic.config.textCasing,
+    (state) => state.practice.settings.current.textCasing,
   );
 
   return (
