@@ -1,3 +1,5 @@
 # keyCap
 
-A responsive, single-page application for practicing typing skills.
+A web application for practicing typing skills.
+
+Production: https://key-cap.netlify.app
