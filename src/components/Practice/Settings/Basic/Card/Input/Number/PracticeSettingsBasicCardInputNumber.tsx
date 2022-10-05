@@ -1,7 +1,7 @@
 import type NumberRange from 'nluka-number-range';
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settingsActions';
 import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 
 interface IProps {

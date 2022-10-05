@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settingsActions';
 import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 import './PracticeSettingsBasicCardInputBoolean.css';
 

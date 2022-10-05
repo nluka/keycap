@@ -4,7 +4,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settingsActions';
 import store from '../../../../../../../redux/store';
 import createDeepCopy from '../../../../../../../utility/functions/createDeepCopy';
 import displayAlert from '../../../../../../../utility/functions/displayAlert';

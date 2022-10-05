@@ -1,7 +1,7 @@
 import NumberRange from 'nluka-number-range';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settingsActions';
 import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 import normalizeMaxValue from './normalizeMaxValue';
 import normalizeMinValue from './normalizeMinValue';

@@ -15,3 +15,6 @@
 #practiceInput:focus {
   --shadow-color: var(--color-border-low);
 }
+#practiceInput[data-has-mistakes='true'] {
+  background-color: rgba(var(--rgb-red), 0.5);
+}

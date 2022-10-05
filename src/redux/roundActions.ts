@@ -10,7 +10,7 @@ import {
   _actionCreatorPracticeRoundCountdownSetInterval,
   _actionCreatorPracticeRoundCountdownStart,
   _actionCreatorPracticeRoundCountdownTick,
-} from './countdown';
+} from './countdownActions';
 import { PracticeStatus } from './types';
 import storage from '../local-storage';
 import type { IPracticeRoundResult } from '../utility/types/practice';
@@ -31,11 +31,12 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
       store.getState().practice.playArea.roundStatus !==
       PracticeStatus.generatingText
     ) {
-      // Round was aborted during text generation
+      // Round was aborted while we were asynchronously generating the text
       return;
     }
 
     if (content instanceof Error) {
+      // Something went wrong, we were unable to generate text
       dispatch(
         _actionCreatorPracticeRoundTextGenerationFailure({ error: content }),
       );
@@ -58,6 +59,7 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
     }
 
     if (config.countdownLength === 0) {
+      // User has opted for no countdown, start round immediately
       dispatch(_actionCreatorPracticeRoundStart());
       return;
     }
@@ -68,7 +70,7 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
       }),
     );
 
-    tick();
+    tick(); // Always tick once
     const interval = setInterval(tick, 1000);
 
     function tick() {
@@ -77,21 +79,23 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
         getState().practice.playArea.countdown.secondsRemaining;
 
       if (secondsRemaining === 0) {
+        // countdown is over
+        if (interval !== null) {
+          // if the countdown was > 1 second, clear the interval we set
+          clearInterval(interval);
+        }
         dispatch(
           _actionCreatorPracticeRoundCountdownSetInterval({ interval: null }),
         );
-        clearInterval(interval);
-        playSound(SoundName.countdownBeepLong, config.soundVolume);
+        // dispatch(_actionCreatorPracticeRoundCountdownTick());
         dispatch(_actionCreatorPracticeRoundStart());
+        playSound(SoundName.countdownBeepLong, config.soundVolume);
       } else {
+        // tick down again
+        dispatch(_actionCreatorPracticeRoundCountdownTick());
         playSound(SoundName.countdownBeepShort, config.soundVolume);
       }
-      dispatch(_actionCreatorPracticeRoundCountdownTick());
     }
-
-    dispatch(
-      _actionCreatorPracticeRoundCountdownSetInterval({ interval: interval }),
-    );
   };
 }
 
@@ -184,7 +188,7 @@ export function _actionCreatorPracticeRoundEnd(): IActionPracticeRoundEnd {
 }
 
 export const ACTION_TYPE_PRACTICE_ROUND_TEXT_GENERATION_START =
-  'practice/textGenerationStart';
+  'practice/roundTextGenerationStart';
 export interface IActionPracticeRoundTextGenerationStart {
   type: typeof ACTION_TYPE_PRACTICE_ROUND_TEXT_GENERATION_START;
 }

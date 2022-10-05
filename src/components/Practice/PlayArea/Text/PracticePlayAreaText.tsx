@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { actionCreatorPracticeRoundEnd } from '../../../../redux/round';
+import { actionCreatorPracticeRoundEnd } from '../../../../redux/roundActions';
 import store from '../../../../redux/store';
 import { PracticeStatus } from '../../../../redux/types';
 import type { ISelectedChar } from '../PracticePlayArea';

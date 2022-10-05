@@ -8,7 +8,7 @@ import {
   ACTION_TYPE_PRACTICE_ROUND_COUNTDOWN_SET_INTERVAL,
   ACTION_TYPE_PRACTICE_ROUND_COUNTDOWN_START,
   ACTION_TYPE_PRACTICE_ROUND_COUNTDOWN_TICK,
-} from './countdown';
+} from './countdownActions';
 import {
   ACTION_TYPE_PRACTICE_ROUND_ABORT,
   ACTION_TYPE_PRACTICE_ROUND_END,
@@ -17,12 +17,12 @@ import {
   ACTION_TYPE_PRACTICE_ROUND_TEXT_GENERATION_START,
   ACTION_TYPE_PRACTICE_ROUND_TEXT_GENERATION_SUCCESS,
   ACTION_TYPE_PRACTICE_ROUND_UPDATE,
-} from './round';
+} from './roundActions';
 import {
   ACTION_TYPE_PRACTICE_SETTINGS_PIN,
   ACTION_TYPE_PRACTICE_SETTINGS_REPLACE,
   ACTION_TYPE_PRACTICE_SETTINGS_UNPIN,
-} from './settings';
+} from './settingsActions';
 import { IStatePractice, PracticeRoundStopCode, PracticeStatus } from './types';
 
 const initialState: IStatePractice = {

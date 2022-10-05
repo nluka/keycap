@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import roundTextGetFirstUncompletedItemIndex from '../../../../core/roundTextGetFirstUncompletedItemIndex';
 
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import {
   actionCreatorPracticeRoundAbort,
   actionCreatorPracticeRoundInit,
   actionCreatorPracticeRoundUpdate,
-} from '../../../../redux/round';
+} from '../../../../redux/roundActions';
 import { PracticeStatus } from '../../../../redux/types';
 import replaceControlCharsWithVisibleChars from '../../../../utility/functions/replaceControlCharsWithVisibleChars';
 import './PracticePlayAreaInput.css';
@@ -17,6 +18,9 @@ export default function PracticePlayAreaInput() {
   const [isFocused, setIsFocused] = useState(false);
   const roundStatus = useAppSelector(
     (state) => state.practice.playArea.roundStatus,
+  );
+  const textItems = useAppSelector(
+    (state) => state.practice.playArea.roundText?.items,
   );
   const textItemsCompletedCount = useAppSelector(
     (state) => state.practice.playArea.roundText?.itemsCompletedCount,
@@ -100,6 +104,27 @@ export default function PracticePlayAreaInput() {
     );
   }
 
+  function areThereUncorrectedMistakesInBuffer() {
+    if (textItems === undefined || textItems.length === 0) {
+      return false;
+    }
+    const currentItemIdx = roundTextGetFirstUncompletedItemIndex(textItems);
+    if (currentItemIdx >= textItems.length) {
+      // all items are completed and correct
+      return false;
+    }
+    const currentItem = textItems[currentItemIdx];
+    for (const char of currentItem.chars) {
+      if (char.input === null) {
+        // reached end of input
+        return false;
+      } else if (char.input !== char.actual) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <textarea
       autoCapitalize="none"
@@ -107,6 +132,7 @@ export default function PracticePlayAreaInput() {
       autoCorrect="false"
       autoFocus={true}
       className="text-norm py-1 rounded w-100"
+      data-has-mistakes={areThereUncorrectedMistakesInBuffer()}
       id="practiceInput"
       onBlur={() => setIsFocused(false)}
       onChange={handleChange}

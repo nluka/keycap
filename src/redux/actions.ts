@@ -2,7 +2,7 @@ import type {
   IActionPracticeRoundCountdownSetInterval,
   IActionPracticeRoundCountdownStart,
   IActionPracticeRoundCountdownTick,
-} from './countdown';
+} from './countdownActions';
 import type {
   IActionPracticeRoundAbort,
   IActionPracticeRoundEnd,
@@ -11,12 +11,12 @@ import type {
   IActionPracticeRoundTextGenerationStart,
   IActionPracticeRoundTextGenerationSuccess,
   IActionPracticeRoundUpdate,
-} from './round';
+} from './roundActions';
 import type {
   IActionPracticeSettingsUnpin,
   IActionPracticeSettingsReplace,
   IActionPracticeSettingsPin,
-} from './settings';
+} from './settingsActions';
 
 type PracticeActions =
   | IActionPracticeRoundTextGenerationStart

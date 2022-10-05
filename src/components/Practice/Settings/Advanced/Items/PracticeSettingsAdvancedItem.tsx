@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/settingsActions';
 import { SPACE } from '../../../../../utility/constants';
 import type { PracticeSettingName } from '../../../../../utility/types/practice';
 import './PracticeSettingsAdvancedItem.css';

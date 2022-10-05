@@ -1,7 +1,7 @@
 import React from 'react';
 import storage from '../../../../local-storage';
 import { useAppDispatch } from '../../../../redux/hooks';
-import { actionCreatorPracticeSettingsReplace } from '../../../../redux/settings';
+import { actionCreatorPracticeSettingsReplace } from '../../../../redux/settingsActions';
 import store from '../../../../redux/store';
 import { DEFAULT_PRACTICE_SETTINGS } from '../../../../utility/constants';
 import createDeepCopy from '../../../../utility/functions/createDeepCopy';

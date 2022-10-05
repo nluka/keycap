@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 } from 'uuid';
 import { useAppDispatch } from '../../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../redux/settingsActions';
 import convertWordArrayToCamelCaseString from '../../../../../../../utility/functions/convertWordArrayToCamelCaseString';
 import type { PracticeSettingName } from '../../../../../../../utility/types/practice';
 import './PracticeSettingsBasicCardInputRadio.css';

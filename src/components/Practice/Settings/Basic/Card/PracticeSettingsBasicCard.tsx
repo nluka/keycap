@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigPinnedUpdate } from '../../../../../redux/settingsActions';
 import type { PracticeSettingName } from '../../../../../utility/types/practice';
 import BootstrapCard from '../../../../Bootstrap/Card/BootstrapCard';
 import './PracticeSettingsBasicCard.css';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/settingsActions';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../../../../../resources/medley_collections/default-collections';
 import type { IPracticeMedleyCollection } from '../../../../../../utility/types/practice';
 import BootstrapButton from '../../../../../Bootstrap/Button/BootstrapButton';

@@ -6,7 +6,7 @@ import {
   actionCreatorPracticeSettingsProfileLoad,
   actionCreatorPracticeSettingsProfileSave,
   actionCreatorPracticeSettingsReplace,
-} from '../../../../redux/settings';
+} from '../../../../redux/settingsActions';
 import store from '../../../../redux/store';
 import createDeepCopy from '../../../../utility/functions/createDeepCopy';
 import displayAlert from '../../../../utility/functions/displayAlert';

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import {
   actionCreatorPracticeRoundAbort,
   actionCreatorPracticeRoundInit,
-} from '../../../../redux/round';
+} from '../../../../redux/roundActions';
 import { PracticeStatus } from '../../../../redux/types';
 import BootstrapButton from '../../../Bootstrap/Button/BootstrapButton';
 import './PracticePlayAreaActionButton.css';

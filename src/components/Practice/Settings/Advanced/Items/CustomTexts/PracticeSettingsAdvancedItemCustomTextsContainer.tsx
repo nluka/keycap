@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../redux/settingsActions';
 import BootstrapButton from '../../../../../Bootstrap/Button/BootstrapButton';
 import PracticeSettingsAdvancedItem from '../PracticeSettingsAdvancedItem';
 import './PracticeSettingsAdvancedItemCustomTextsContainer.css';

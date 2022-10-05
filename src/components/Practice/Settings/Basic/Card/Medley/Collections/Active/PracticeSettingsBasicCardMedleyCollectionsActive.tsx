@@ -3,7 +3,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../../../../../redux/hooks';
-import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../../redux/settings';
+import { actionCreatorPracticeSettingsCurrentConfigUpdate } from '../../../../../../../../redux/settingsActions';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../../../../../../../resources/medley_collections/default-collections';
 import PracticeSettingsBasicCard from '../../../PracticeSettingsBasicCard';
 import getValidCollections from './getValidCollections';
