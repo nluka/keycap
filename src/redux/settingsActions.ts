@@ -21,20 +21,18 @@ export function actionCreatorPracticeSettingsCurrentConfigUpdate(
     const { name, value } = payload;
     const state = getState();
 
-    const updatedSettings = createDeepCopy(
+    const settings = createDeepCopy(
       state.practice.settings,
     ) as IPracticeSettings;
 
     // To avoid writing an obscene amount of code, we simply trust that the
     // client gave the correct type for `value`.
     // @ts-expect-error
-    updatedSettings.current[name] = value;
+    settings.current[name] = value;
 
-    dispatch(
-      _actionCreatorPracticeSettingsReplace({ settings: updatedSettings }),
-    );
+    dispatch(_actionCreatorPracticeSettingsReplace({ settings }));
 
-    updateSettings(dispatch, updatedSettings);
+    updateSettings(dispatch, settings);
   };
 }
 
@@ -110,7 +108,8 @@ export function actionCreatorPracticeSettingsProfileSave(
       state.practice.settings,
     ) as IPracticeSettings;
 
-    updatedSettings.profiles[profileIndex] = createDeepCopy(
+    // Not sure if the deep copy is needed here, but let's be safe
+    updatedSettings.profiles[profileIndex].config = createDeepCopy(
       updatedSettings.current,
     );
 

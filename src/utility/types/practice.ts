@@ -22,7 +22,7 @@ export interface IPracticeConfig {
   isResultRecordingEnabled: boolean;
   medleyCollectionsActive: string[];
   medleyCollectionsCustom: IPracticeMedleyCollection[];
-  medleyItemCount: number;
+  medleyWordCount: number;
   medleyPunctuationFrequency: number;
   mistakeHighlightStyle: PracticeMistakeHighlightStyle;
   quoteLength: IQuoteLength;
@@ -44,7 +44,7 @@ export interface IQuoteLength {
 }
 export interface IPracticeMedleyCollection {
   name: string;
-  items: string[];
+  words: string[];
 }
 export interface IPracticeCustomText {
   name: string;
@@ -55,4 +55,11 @@ export interface IPracticeRoundResult {
   netWordsPerMinute: number;
   accuracyPercentage: number;
   timeElapsed: Time;
+}
+
+export default interface IStats {
+  lastTenRoundResults: IPracticeRoundResult[];
+  averageRoundResult: IPracticeRoundResult;
+  roundsCompletedCount: number;
+  roundsAbortedCount: number;
 }

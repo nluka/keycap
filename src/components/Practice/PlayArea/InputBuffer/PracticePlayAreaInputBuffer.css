@@ -1,0 +1,20 @@
+#practiceInputBuffer {
+  --shadow-color: transparent;
+  background-color: rgb(var(--rgb-h2));
+  border: none;
+  box-shadow: var(--shadow1);
+  caret-color: darkgray;
+  font-family: var(--mono-font-family);
+  font-size: 1.25rem;
+  max-width: 32.5ch;
+  outline: none;
+  overflow: hidden;
+  padding: 0.75rem;
+  resize: none;
+}
+#practiceInputBuffer:focus {
+  --shadow-color: var(--color-border-low);
+}
+#practiceInputBuffer[data-has-mistakes='true'] {
+  background-color: rgba(var(--rgb-red), 0.5);
+}

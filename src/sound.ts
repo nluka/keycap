@@ -32,7 +32,7 @@ export enum SoundName {
   initSound(SoundName.countdownBeepLong);
 })();
 
-export function playSound(name: SoundName, volume: number) {
+export async function playSound(name: SoundName, volume: number) {
   if (volume === 0) {
     return;
   }

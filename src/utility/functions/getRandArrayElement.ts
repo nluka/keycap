@@ -9,6 +9,6 @@ export default function getRandArrayElement<T>(array: T[]): T {
   if (randIndex === null) {
     throw new Error('cannot get a random element: array is empty');
   }
-  const randItem = array[randIndex];
-  return randItem;
+  const randElem = array[randIndex];
+  return randElem;
 }

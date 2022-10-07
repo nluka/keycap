@@ -35,7 +35,7 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionsCustomConta
         <div className="text-norm d-flex flex-column gap-3 mb-2">
           {medleyCollectionsCustom.map((collection) => (
             <PracticeSettingsAdvancedItemMedleyCollectionCustom
-              items={collection.items}
+              words={collection.words}
               key={v4()}
               name={collection.name}
             />
@@ -71,7 +71,7 @@ function AddCollectionButton() {
                 ...medleyCollectionsCustom,
                 {
                   name: getInitialCollectionName(medleyCollectionsCustom),
-                  items: [],
+                  words: [],
                 },
               ],
             }),

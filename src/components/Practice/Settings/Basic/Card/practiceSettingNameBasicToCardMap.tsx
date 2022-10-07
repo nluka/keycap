@@ -8,7 +8,7 @@ import PracticeSettingsBasicCardCustomTextActive from './CustomTextActive/Practi
 import PracticeSettingsBasicCardIsPunctuationEnabled from './IsPunctuationEnabled/PracticeSettingsBasicCardIsPunctuationEnabled';
 import PracticeSettingsBasicCardIsResultRecordingEnabled from './IsResultRecordingEnabled/PracticeSettingsBasicCardIsResultRecordingEnabled';
 import PracticeSettingsBasicCardMedleyCollectionsActive from './Medley/Collections/Active/PracticeSettingsBasicCardMedleyCollectionsActive';
-import PracticeSettingsBasicCardMedleyItemCount from './Medley/Item/Count/PracticeSettingsBasicCardMedleyItemCount';
+import PracticeSettingsBasicCardMedleyWordCount from './Medley/Word/Count/PracticeSettingsBasicCardMedleyWordCount';
 import PracticeSettingsBasicCardMedleyPunctuationFrequency from './Medley/PunctuationFrequency/PracticeSettingsBasicCardMedleyPunctuationFrequency';
 import PracticeSettingsBasicCardMistakeHighlightStyle from './MistakeHighlightStyle/PracticeSettingsBasicCardMistakeHighlightStyle';
 import PracticeSettingsBasicCardQuoteLength from './QuoteLength/PracticeSettingsBasicCardQuoteLength';
@@ -66,9 +66,9 @@ const practiceSettingNameBasicToCardMap = new Map<
     },
   ],
   [
-    'medleyItemCount',
+    'medleyWordCount',
     {
-      element: <PracticeSettingsBasicCardMedleyItemCount key={v4()} />,
+      element: <PracticeSettingsBasicCardMedleyWordCount key={v4()} />,
       tags: [
         'medley item count',
         'medley items',

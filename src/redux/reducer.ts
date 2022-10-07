@@ -1,6 +1,6 @@
-import { roundResultCalc } from '../core/roundResultCalc';
-import roundTextCalcPrevInputValue from '../core/roundTextCalcPrevInputValue';
-import roundTextUpdate from '../core/roundTextUpdate';
+import { calcRoundResult } from '../core/calcRoundResult';
+import deducePrevRoundTextInputBufferState from '../core/deducePrevRoundTextInputBufferState';
+import updateRoundText from '../core/updateRoundText';
 import storage from '../local-storage';
 import createDeepCopy from '../utility/functions/createDeepCopy';
 import type PracticeActions from './actions';
@@ -36,8 +36,8 @@ const initialState: IStatePractice = {
     roundEndTime: null,
     roundStopCode: null,
     roundText: {
-      items: [],
-      itemsCompletedCount: 0,
+      words: [],
+      numWordsCompleted: 0,
       caretPosition: 0,
     },
     roundTextGenerationError: null,
@@ -93,10 +93,10 @@ export default function practiceReducer(
       if (text === null) {
         throw new TypeError('text === null');
       }
-      roundTextUpdate(
+      updateRoundText(
         text,
         action.payload.input,
-        roundTextCalcPrevInputValue(text.items),
+        deducePrevRoundTextInputBufferState(text.words),
       );
       break;
     }
@@ -105,8 +105,8 @@ export default function practiceReducer(
       newState.playArea.roundStatus = PracticeStatus.idle;
       newState.playArea.roundEndTime = endTime;
       newState.playArea.roundStopCode = PracticeRoundStopCode.completed;
-      newState.roundResult = roundResultCalc(
-        state.playArea.roundText?.items || [],
+      newState.roundResult = calcRoundResult(
+        state.playArea.roundText?.words || [],
         state.playArea.roundStartTime as number,
         endTime,
       );

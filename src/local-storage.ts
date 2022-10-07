@@ -1,6 +1,9 @@
-import { DEFAULT_PRACTICE_SETTINGS, DEFAULT_STATS } from './utility/constants';
+import {
+  DEFAULT_PRACTICE_SETTINGS,
+  DEFAULT_PRACTICE_STATS,
+} from './utility/constants';
 import parseBool from './utility/functions/parseBool';
-import type IStats from './utility/types/IStats';
+import type IStats from './utility/types/practice';
 import type {
   IPracticeRoundResult,
   IPracticeSettings,
@@ -42,7 +45,7 @@ function setPracticeSettings(settings: IPracticeSettings) {
 function getStats() {
   const stats = localStorage.getItem(items.stats);
   if (stats === null) {
-    return DEFAULT_STATS;
+    return DEFAULT_PRACTICE_STATS;
   } else {
     return JSON.parse(stats) as IStats;
   }
@@ -53,7 +56,7 @@ function setStats(stats: IStats) {
 }
 
 function resetStats() {
-  setStats(DEFAULT_STATS);
+  setStats(DEFAULT_PRACTICE_STATS);
 }
 
 function addCompletedRound(result: IPracticeRoundResult) {

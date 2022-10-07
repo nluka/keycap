@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type IRoundTextItemCharMistake from '../../../../../../core/types/IRoundTextItemCharMistake';
+import type { IRoundTextCharMistake } from '../../../../../../core/types';
 import { SPACE } from '../../../../../../utility/constants';
 import replaceControlCharsWithVisibleChars from '../../../../../../utility/functions/replaceControlCharsWithVisibleChars';
 import type { ISelectedChar } from '../../../PracticePlayArea';
@@ -7,7 +7,7 @@ import './PracticePlayAreaTextCharAnalyzed.css';
 
 interface IProps {
   actual: string;
-  mistakes: IRoundTextItemCharMistake[];
+  mistakes: IRoundTextCharMistake[];
   position: number;
   selectedChar: ISelectedChar | null;
   setSelectedChar: React.Dispatch<React.SetStateAction<ISelectedChar | null>>;

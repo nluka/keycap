@@ -15,22 +15,22 @@ import BootstrapButton from '../../../../../../Bootstrap/Button/BootstrapButton'
 import './PracticeSettingsAdvancedItemMedleyCollectionCustom.css';
 
 const MAX_LENGTH_NAME = 32;
-const MAX_LENGTH_ITEMS = 1000;
+const MAX_LENGTH_WORDS_BUFFER = 1000;
 
 export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
   props: IPracticeMedleyCollection,
 ) {
   const [name, setName] = useState(props.name);
-  const [items, setItems] = useState(props.items.join(SPACE));
+  const [words, setWords] = useState(props.words.join(SPACE));
   const medleyCollectionsActive = useAppSelector(
     (state) => state.practice.settings.current.medleyCollectionsActive,
   );
   const medleyCollectionsCustom = useAppSelector(
     (state) => state.practice.settings.current.medleyCollectionsCustom,
   );
-  const prevItems = useRef(items);
+  const prevWords = useRef(words);
   const nameLength = useRef(name.length);
-  const itemCount = useRef(items.length);
+  const wordsBufferLen = useRef(words.length);
   const dispatch = useAppDispatch();
 
   return (
@@ -83,9 +83,9 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
       <textarea
         className="items p-2 rounded w-100"
         onBlur={(event) =>
-          handleCollectionItemsInputBlur(
+          handleCollectionWordsInputBlur(
             event.target.value,
-            prevItems,
+            prevWords,
             props,
             medleyCollectionsCustom,
             dispatch,
@@ -93,26 +93,26 @@ export default function PracticeSettingsAdvancedItemMedleyCollectionCustom(
         }
         onChange={(event) => {
           handleChange(
-            ChangeTarget.Items,
+            ChangeTarget.Words,
             event.target.value,
-            MAX_LENGTH_ITEMS,
-            itemCount,
-            setItems,
+            MAX_LENGTH_WORDS_BUFFER,
+            wordsBufferLen,
+            setWords,
             { forceLowerCase: false },
           );
         }}
         placeholder="Items (letters/numbers/symbols separated by spaces)"
         spellCheck="false"
-        value={items}
+        value={words}
       />
-      <div className="small text-low">{`${itemCount.current}/${MAX_LENGTH_ITEMS} characters`}</div>
+      <div className="small text-low">{`${wordsBufferLen.current}/${MAX_LENGTH_WORDS_BUFFER} characters`}</div>
     </div>
   );
 }
 
 enum ChangeTarget {
   Name,
-  Items,
+  Words,
 }
 
 function handleChange(
@@ -272,15 +272,15 @@ function handleCollectionDeleteButtonClick(
   );
 }
 
-function handleCollectionItemsInputBlur(
+function handleCollectionWordsInputBlur(
   eventTargetValue: string,
-  prevItems: React.MutableRefObject<string>,
+  prevWords: React.MutableRefObject<string>,
   collectionToUpdate: IPracticeMedleyCollection,
   currentCollections: IPracticeMedleyCollection[],
   dispatch: Dispatch<any>,
 ) {
-  const isNewValueSameAsCurrent = eventTargetValue === prevItems.current;
-  prevItems.current = eventTargetValue;
+  const isNewValueSameAsCurrent = eventTargetValue === prevWords.current;
+  prevWords.current = eventTargetValue;
 
   if (isNewValueSameAsCurrent) {
     return;
@@ -295,11 +295,11 @@ function handleCollectionItemsInputBlur(
   }
 
   const valueTrimmed = eventTargetValue.trim();
-  let newItems: string[];
+  let newWords: string[];
   if (valueTrimmed.length === 0) {
-    newItems = [];
+    newWords = [];
   } else {
-    newItems = valueTrimmed.split(/ +/);
+    newWords = valueTrimmed.split(/ +/);
   }
 
   const updatedCollections = createDeepCopy(
@@ -308,7 +308,7 @@ function handleCollectionItemsInputBlur(
 
   updatedCollections[collectionToUpdateIndex] = {
     name: collectionToUpdate.name,
-    items: newItems,
+    words: newWords,
   };
 
   dispatch(

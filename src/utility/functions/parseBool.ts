@@ -1,7 +1,3 @@
-/**
- * @param value The value to be parsed.
- * @returns The equivalent boolean if the value can be parsed, undefined if it cannot be parsed.
- */
 export default function parseBool(
   value: boolean | string | number | null | undefined,
 ) {
@@ -15,14 +11,11 @@ export default function parseBool(
     return value !== 0;
   }
   switch (value.toLowerCase()) {
-    case 'true': {
+    case 'true':
       return true;
-    }
-    case 'false': {
+    case 'false':
       return false;
-    }
-    default: {
+    default:
       return null;
-    }
   }
 }

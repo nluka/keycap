@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CHARACTERS_PER_WORD } from '../../../../core/constants';
-import roundResultCalcNetWordsPerMinute from '../../../../core/roundResultCalcNetWordsPerMinute';
-import roundTextCalcCorrectCharsCount from '../../../../core/roundTextCalcCorrectCharsCount';
+import { CHARS_PER_WORD } from '../../../../core/constants';
+import calcNetWPM from '../../../../core/calcNetWPM';
+import countCorrectRoundTextChars from '../../../../core/countCorrectRoundTextChars';
 import { useAppSelector } from '../../../../redux/hooks';
 import store from '../../../../redux/store';
 import { PracticeStatus } from '../../../../redux/types';
-import getMinutesElapsed from '../../../../utility/functions/getMinutesElapsed';
+import minutesElapsed from '../../../../utility/functions/minutesElapsed';
 import './PracticePlayAreaWpmCounter.css';
 
 const UPDATE_INTERVAL_MS = 250;
@@ -54,10 +54,10 @@ export default function PracticePlayAreaWpmCounter() {
     }
 
     setWpm(
-      roundResultCalcNetWordsPerMinute(
-        roundTextCalcCorrectCharsCount(text.items),
-        CHARACTERS_PER_WORD,
-        getMinutesElapsed(startTime, Date.now()),
+      calcNetWPM(
+        countCorrectRoundTextChars(text.words),
+        CHARS_PER_WORD,
+        minutesElapsed(startTime, Date.now()),
       ),
     );
   }

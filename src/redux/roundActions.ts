@@ -1,8 +1,7 @@
 import type { AnyAction } from 'redux';
 import type { ThunkAction } from 'redux-thunk';
-import roundTextCreate from '../core/roundTextCreate';
-import type IRoundText from '../core/types/IRoundText';
-import practiceContentGenerate from '../practice/practiceContentGenerate';
+import createRoundText from '../core/createRoundText';
+import generatePracticeContent from '../practice/generatePracticeContent';
 import { playSound, SoundName } from '../sound';
 import type { RootState } from './store';
 import store from './store';
@@ -14,6 +13,7 @@ import {
 import { PracticeStatus } from './types';
 import storage from '../local-storage';
 import type { IPracticeRoundResult } from '../utility/types/practice';
+import type { IRoundText } from '../core/types';
 
 export function actionCreatorPracticeRoundInit(): ThunkAction<
   void,
@@ -25,7 +25,7 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
     const config = getState().practice.settings.current;
 
     dispatch(_actionCreatorPracticeTextGenerationStart());
-    const content = await practiceContentGenerate(config);
+    const content = await generatePracticeContent(config);
 
     if (
       store.getState().practice.playArea.roundStatus !==
@@ -44,7 +44,7 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
     }
 
     try {
-      const text = roundTextCreate(content);
+      const text = createRoundText(content);
       dispatch(_actionCreatorPracticeRoundTextGenerationSuccess({ text }));
     } catch (err) {
       console.error('Failed to create text:', err);
@@ -73,25 +73,25 @@ export function actionCreatorPracticeRoundInit(): ThunkAction<
     tick(); // Always tick once
     const interval = setInterval(tick, 1000);
 
+    // Needed so that if we abort the round during countdown, the abort handler
+    // can clear the interval
+    dispatch(_actionCreatorPracticeRoundCountdownSetInterval({ interval }));
+
     function tick() {
       const config = getState().practice.settings.current;
       const secondsRemaining =
         getState().practice.playArea.countdown.secondsRemaining;
 
       if (secondsRemaining === 0) {
-        // countdown is over
-        if (interval !== null) {
-          // if the countdown was > 1 second, clear the interval we set
-          clearInterval(interval);
-        }
+        // Countdown is over
         dispatch(
           _actionCreatorPracticeRoundCountdownSetInterval({ interval: null }),
         );
-        // dispatch(_actionCreatorPracticeRoundCountdownTick());
+        clearInterval(interval);
         dispatch(_actionCreatorPracticeRoundStart());
         playSound(SoundName.countdownBeepLong, config.soundVolume);
       } else {
-        // tick down again
+        // Tick down again
         dispatch(_actionCreatorPracticeRoundCountdownTick());
         playSound(SoundName.countdownBeepShort, config.soundVolume);
       }

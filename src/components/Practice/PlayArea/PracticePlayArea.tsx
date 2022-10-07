@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import type IRoundTextItemCharMistake from '../../../core/types/IRoundTextItemCharMistake';
+import type { IRoundTextCharMistake } from '../../../core/types';
 import PracticePlayAreaAccuracyMeter from './AccuracyMeter/PracticePlayAreaAccuracyMeter';
 import PracticePlayAreaActionButton from './ActionButton/PracticePlayAreaActionButton';
 import PracticePlayAreaCountdownTimer from './CountdownTimer/PracticePlayAreaCountdownTimer';
-import PracticePlayAreaInput from './Input/PracticePlayAreaInput';
+import PracticePlayAreaInputBuffer from './InputBuffer/PracticePlayAreaInputBuffer';
 import PracticePlayAreaMistakeAnalysis from './MistakeAnalysis/PracticePlayAreaMistakeAnalysis';
 import PracticePlayAreaStopwatch from './Stopwatch/PracticePlayAreaStopwatch';
 import PracticePlayAreaText from './Text/PracticePlayAreaText';
@@ -11,7 +11,7 @@ import PracticePlayAreaWpmCounter from './WpmCounter/PracticePlayAreaWpmCounter'
 
 export interface ISelectedChar {
   actual: string;
-  mistakes: IRoundTextItemCharMistake[];
+  mistakes: IRoundTextCharMistake[];
   position: number;
 }
 
@@ -33,7 +33,7 @@ export default function PracticePlayArea() {
         setSelectedChar={setSelectedChar}
       />
       <div className="d-flex gap-2">
-        <PracticePlayAreaInput />
+        <PracticePlayAreaInputBuffer />
         <PracticePlayAreaActionButton />
       </div>
       <PracticePlayAreaMistakeAnalysis selectedChar={selectedChar} />

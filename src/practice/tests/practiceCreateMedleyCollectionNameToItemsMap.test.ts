@@ -2,9 +2,9 @@ import { describe, expect, test } from '@jest/globals';
 import BUILT_IN_MEDLEY_COLLECTIONS from '../../resources/medley_collections/default-collections';
 import randNumbers from '../../resources/medley_collections/randNumbers';
 import type { IPracticeMedleyCollection } from '../../utility/types/practice';
-import practiceCreateMedleyCollectionNameToItemsMap from '../practiceCreateMedleyCollectionNameToItemsMap';
+import createPracticeMedleyCollectionNameToWordsMap from '../createPracticeMedleyCollectionNameToWordsMap';
 
-describe('practiceCreateMedleyCollectionNameToItemsMap', () => {
+describe('practiceCreateMedleyCollectionNameToWordsMap', () => {
   describe('should return correct map when', () => {
     function assert(
       definedCollections: IPracticeMedleyCollection[],
@@ -15,7 +15,7 @@ describe('practiceCreateMedleyCollectionNameToItemsMap', () => {
         definedCollections.map((c) => c.name),
       )}, activeCollections=${JSON.stringify(activeCollections)}`, () => {
         expect(
-          practiceCreateMedleyCollectionNameToItemsMap(
+          createPracticeMedleyCollectionNameToWordsMap(
             definedCollections,
             activeCollections,
           ),
@@ -35,11 +35,11 @@ describe('practiceCreateMedleyCollectionNameToItemsMap', () => {
 
     {
       const definedCollections: IPracticeMedleyCollection[] = [
-        { name: 'custom-collection-1', items: ['item1', 'item2'] },
+        { name: 'custom-collection-1', words: ['word1', 'word2'] },
       ];
       const activeCollections = [definedCollections[0].name];
       const expected = new Map<string, string[]>([
-        [definedCollections[0].name, definedCollections[0].items],
+        [definedCollections[0].name, definedCollections[0].words],
       ]);
       assert(definedCollections, activeCollections, expected);
     }

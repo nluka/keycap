@@ -101,10 +101,11 @@ function Profile(props: IProfileProps) {
   }
 
   function handleDelete() {
-    const choice = confirm(
-      `Are you sure you want to delete '${name}'?\nThis action is irreversible.`,
-    );
-    if (!choice) {
+    if (
+      !confirm(
+        `Are you sure you want to delete '${name}'?\nThis action is irreversible.`,
+      )
+    ) {
       return;
     }
 
@@ -205,20 +206,13 @@ function AddProfileButton() {
         if (profiles.length >= 5) {
           return;
         }
-
-        const currentSettings = store.getState().practice.settings;
-
-        const updatedSettings = createDeepCopy(
-          currentSettings,
-        ) as IPracticeSettings;
-
-        updatedSettings.profiles.push({
+        const prevSettings = store.getState().practice.settings;
+        const settings = createDeepCopy(prevSettings) as IPracticeSettings;
+        settings.profiles.push({
           name: getStartingName(),
-          config: currentSettings.current,
+          config: settings.current,
         });
-        dispatch(
-          actionCreatorPracticeSettingsReplace({ settings: updatedSettings }),
-        );
+        dispatch(actionCreatorPracticeSettingsReplace({ settings }));
       }}
       theme="primary"
     >

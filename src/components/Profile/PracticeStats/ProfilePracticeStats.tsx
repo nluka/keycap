@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
 import storage from '../../../local-storage';
-import { DEFAULT_STATS } from '../../../utility/constants';
-import calcAverage from '../../../utility/functions/calcAverage';
+import { DEFAULT_PRACTICE_STATS } from '../../../utility/constants';
+import average from '../../../utility/functions/average';
 import { getTimeElapsedText } from '../../../utility/functions/getTimeElapsedText';
-import type IStats from '../../../utility/types/IStats';
+import type IPracticeStats from '../../../utility/types/practice';
 import BootstrapButton from '../../Bootstrap/Button/BootstrapButton';
 import BootstrapTable from '../../Bootstrap/Table/BootstrapTable';
 import Panel from '../../Panel/Panel';
@@ -27,7 +27,7 @@ export default function ProfilePracticeStats() {
 }
 
 function Content() {
-  const [stats, setStats] = useState<IStats>(storage.getStats());
+  const [stats, setStats] = useState<IPracticeStats>(storage.getStats());
   const isLastTenRoundResultsPopulated =
     stats !== null && stats.lastTenRoundResults.length > 0;
 
@@ -54,7 +54,7 @@ function Content() {
             <td>
               {stats.lastTenRoundResults.length === 0
                 ? '···'
-                : calcAverage(
+                : average(
                     stats.lastTenRoundResults.map(
                       (result) => result.netWordsPerMinute,
                     ),
@@ -63,7 +63,7 @@ function Content() {
             <td>
               {stats.lastTenRoundResults.length === 0
                 ? '···'
-                : calcAverage(
+                : average(
                     stats.lastTenRoundResults.map(
                       (result) => result.accuracyPercentage,
                     ),
@@ -73,7 +73,7 @@ function Content() {
               {stats.lastTenRoundResults.length === 0
                 ? '···'
                 : getTimeElapsedText(
-                    calcAverage(
+                    average(
                       stats.lastTenRoundResults.map(
                         (result) => result.timeElapsed,
                       ),
@@ -158,7 +158,7 @@ function Content() {
           }
 
           storage.resetStats();
-          setStats(DEFAULT_STATS);
+          setStats(DEFAULT_PRACTICE_STATS);
         }}
         theme="warning"
       >

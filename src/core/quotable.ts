@@ -12,15 +12,7 @@ interface IQuoteableApiQuote {
   tags: string[];
 }
 
-// interface IRandQuoteParams {
-//   minLength?: number;
-//   maxLength?: number;
-// }
-
-export async function fetchRandQuote(
-  // params: IRandQuoteParams = { minLength: undefined, maxLength: undefined },
-  config: IPracticeConfig,
-) {
+export async function fetchRandQuote(config: IPracticeConfig) {
   // API docs: https://github.com/lukePeavey/quotable
 
   const url = getUrlWithAppendedQueryParams('https://api.quotable.io/random', {
@@ -39,7 +31,7 @@ export async function fetchRandQuote(
     if (err.response.status === HTTP_STATUS.NOT_FOUND) {
       return new Error('no quotes exist in the specified length range');
     }
-    return new Error('unknown error');
+    throw err;
   }
 }
 

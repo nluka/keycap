@@ -1,5 +1,5 @@
 import NumberRange from 'nluka-number-range';
-import type IStats from './types/IStats';
+import type IStats from './types/practice';
 import type { IPracticeSettings } from './types/practice';
 
 export const SPACE = ' ';
@@ -22,7 +22,7 @@ export const DEFAULT_PRACTICE_SETTINGS: IPracticeSettings = {
       'bi-rand-numbers',
       'bi-symbols',
     ],
-    medleyItemCount: 15,
+    medleyWordCount: 15,
     medleyPunctuationFrequency: 0,
     mistakeHighlightStyle: 'background',
     quoteLength: {
@@ -42,14 +42,14 @@ export const PRACTICE_SETTINGS_QUOTE_LENGTH_LIMITS = new NumberRange(1, 250);
 export const PRACTICE_SETTINGS_COUNTDOWN_LENGTH_LIMITS = new NumberRange(0, 5);
 export const PRACTICE_SETTINGS_SOUND_VOLUME_LIMITS = new NumberRange(0, 1);
 export const PRACTICE_SETTINGS_CARET_DELAY_LIMITS = new NumberRange(0, 1);
-export const PRACTICE_SETTINGS_MEDLEY_ITEM_COUNT_LIMITS = new NumberRange(
+export const PRACTICE_SETTINGS_MEDLEY_WORD_COUNT_LIMITS = new NumberRange(
   1,
   100,
 );
 export const PRACTICE_SETTINGS_MEDLEY_PUNCTUATION_FREQUENCY_LIMITS =
   new NumberRange(0, 1);
 
-export const DEFAULT_STATS: IStats = {
+export const DEFAULT_PRACTICE_STATS: IStats = {
   lastTenRoundResults: [],
   averageRoundResult: {
     netWordsPerMinute: 0,

@@ -30,13 +30,13 @@ export default function PracticePlayAreaText(props: IProps) {
     const isRoundCompleted =
       roundStatus === PracticeStatus.running &&
       roundText !== null &&
-      roundText.items.length > 0 &&
-      roundText.itemsCompletedCount === roundText.items.length;
+      roundText.words.length > 0 &&
+      roundText.numWordsCompleted === roundText.words.length;
 
     if (isRoundCompleted) {
       dispatch(actionCreatorPracticeRoundEnd());
     }
-  }, [roundText?.items.length, roundText?.itemsCompletedCount, roundStatus]);
+  }, [roundText?.words.length, roundText?.numWordsCompleted, roundStatus]);
 
   useEffect(() => {
     if (roundStatus !== PracticeStatus.idle) {
@@ -51,7 +51,7 @@ export default function PracticePlayAreaText(props: IProps) {
     if (roundText === null) {
       return <p className="text-danger m-0">Internal error</p>;
     }
-    if (roundText.items.length === 0) {
+    if (roundText.words.length === 0) {
       return (
         <p className="m-0">
           Use the button or the keyboard shortcuts <Key text="Enter" /> to
@@ -60,7 +60,7 @@ export default function PracticePlayAreaText(props: IProps) {
       );
     }
     if (
-      roundText.items.length > 0 &&
+      roundText.words.length > 0 &&
       roundStatus !== PracticeStatus.running &&
       roundResult !== null
     ) {
@@ -77,8 +77,8 @@ export default function PracticePlayAreaText(props: IProps) {
       throw new TypeError('roundText === null');
     }
 
-    for (const item of roundText.items) {
-      for (const char of item.chars) {
+    for (const word of roundText.words) {
+      for (const char of word.chars) {
         chars.push(
           <PracticePlayAreaTextChar
             actual={char.actual}
@@ -105,8 +105,8 @@ export default function PracticePlayAreaText(props: IProps) {
       throw new TypeError('roundText === null');
     }
 
-    for (const item of roundText.items) {
-      for (const char of item.chars) {
+    for (const word of roundText.words) {
+      for (const char of word.chars) {
         chars.push(
           <PracticePlayAreaTextCharAnalyzed
             actual={char.actual}

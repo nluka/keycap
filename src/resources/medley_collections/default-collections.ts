@@ -10,15 +10,15 @@ import randWholeNumbers from './randWholeNumbers';
 import symbols from './symbols';
 
 const BUILT_IN_MEDLEY_COLLECTIONS: IPracticeMedleyCollection[] = [
-  { name: 'bi-common-words', items: commonWords },
-  { name: 'bi-rand-numbers', items: randNumbers },
-  { name: 'bi-rand-whole-numbers', items: randWholeNumbers },
-  { name: 'bi-rand-integers', items: randIntegers },
-  { name: 'bi-rand-decimal-numbers', items: randDecimalNumbers },
-  { name: 'bi-digits', items: digits },
-  { name: 'bi-symbols', items: symbols },
-  { name: 'bi-punctuation', items: punctuation },
-  { name: 'bi-alphabet', items: alphabet },
+  { name: 'bi-common-words', words: commonWords },
+  { name: 'bi-rand-numbers', words: randNumbers },
+  { name: 'bi-rand-whole-numbers', words: randWholeNumbers },
+  { name: 'bi-rand-integers', words: randIntegers },
+  { name: 'bi-rand-decimal-numbers', words: randDecimalNumbers },
+  { name: 'bi-digits', words: digits },
+  { name: 'bi-symbols', words: symbols },
+  { name: 'bi-punctuation', words: punctuation },
+  { name: 'bi-alphabet', words: alphabet },
 ];
 
 export default BUILT_IN_MEDLEY_COLLECTIONS;

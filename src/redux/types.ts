@@ -1,4 +1,4 @@
-import type IRoundText from '../core/types/IRoundText';
+import type { IRoundText } from '../core/types';
 import type {
   IPracticeRoundResult,
   IPracticeSettings,
