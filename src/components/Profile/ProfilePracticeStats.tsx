@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
-import storage from '../../../local-storage';
-import { DEFAULT_PRACTICE_STATS } from '../../../utility/constants';
-import average from '../../../utility/functions/average';
-import { getTimeElapsedText } from '../../../utility/functions/getTimeElapsedText';
-import type IPracticeStats from '../../../utility/types/practice';
-import BootstrapButton from '../../Bootstrap/Button/BootstrapButton';
-import BootstrapTable from '../../Bootstrap/Table/BootstrapTable';
-import Panel from '../../Panel/Panel';
+import storage from '../../local-storage';
+import { DEFAULT_PRACTICE_STATS } from '../../utility/constants';
+import average from '../../utility/functions/average';
+import { getTimeElapsedText } from '../../utility/functions/getTimeElapsedText';
+import type IPracticeStats from '../../utility/types/practice';
+import BootstrapButton from '../Bootstrap/Button/BootstrapButton';
+import BootstrapTable from '../Bootstrap/Table/BootstrapTable';
+import Panel from '../Panel/Panel';
 import './ProfilePracticeStats.css';
 
 export default function ProfilePracticeStats() {

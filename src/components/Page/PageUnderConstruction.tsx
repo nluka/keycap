@@ -7,6 +7,7 @@ import Page from './Page';
 interface IProps {
   title: string;
 }
+
 export default function PageUnderConstruction(props: IProps) {
   return (
     <Page title={`keyCap | ${props.title}`}>

@@ -21,10 +21,6 @@ export default function App() {
             <PagePractice />
           </Route>
 
-          <Route path="/practice">
-            <PagePractice />
-          </Route>
-
           <Route path="/profile">
             <PageUserProfile />
           </Route>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppSelector } from '../../../../../../../../redux/hooks';
-import { PRACTICE_SETTINGS_MEDLEY_WORD_COUNT_LIMITS } from '../../../../../../../../utility/constants';
-import PracticeSettingsBasicCardInputNumber from '../../../Input/Number/PracticeSettingsBasicCardInputNumber';
-import PracticeSettingsBasicCard from '../../../PracticeSettingsBasicCard';
+import { useAppSelector } from '../../../../../../../redux/hooks';
+import { PRACTICE_SETTINGS_MEDLEY_WORD_COUNT_LIMITS } from '../../../../../../../utility/constants';
+import PracticeSettingsBasicCardInputNumber from '../../Input/Number/PracticeSettingsBasicCardInputNumber';
+import PracticeSettingsBasicCard from '../../PracticeSettingsBasicCard';
 
 export default function PracticeSettingsBasicCardMedleyWordCount() {
   return (

@@ -8,13 +8,13 @@ import PracticeSettingsBasicCardCustomTextActive from './CustomTextActive/Practi
 import PracticeSettingsBasicCardIsPunctuationEnabled from './IsPunctuationEnabled/PracticeSettingsBasicCardIsPunctuationEnabled';
 import PracticeSettingsBasicCardIsResultRecordingEnabled from './IsResultRecordingEnabled/PracticeSettingsBasicCardIsResultRecordingEnabled';
 import PracticeSettingsBasicCardMedleyCollectionsActive from './Medley/Collections/Active/PracticeSettingsBasicCardMedleyCollectionsActive';
-import PracticeSettingsBasicCardMedleyWordCount from './Medley/Word/Count/PracticeSettingsBasicCardMedleyWordCount';
+import PracticeSettingsBasicCardMedleyWordCount from './Medley/WordCount/PracticeSettingsBasicCardMedleyWordCount';
 import PracticeSettingsBasicCardMedleyPunctuationFrequency from './Medley/PunctuationFrequency/PracticeSettingsBasicCardMedleyPunctuationFrequency';
 import PracticeSettingsBasicCardMistakeHighlightStyle from './MistakeHighlightStyle/PracticeSettingsBasicCardMistakeHighlightStyle';
 import PracticeSettingsBasicCardQuoteLength from './QuoteLength/PracticeSettingsBasicCardQuoteLength';
-import PracticeSettingsBasicCardSoundVolume from './SoundVolume/Volume/PracticeSettingsBasicCardSoundVolume';
 import PracticeSettingsBasicCardTextCasing from './Text/Casing/PracticeSettingsBasicCardTextCasing';
 import PracticeSettingsBasicCardTextType from './Text/Type/PracticeSettingsBasicCardTextType';
+import PracticeSettingsBasicCardSoundVolume from './SoundVolume/PracticeSettingsBasicCardSoundVolume';
 
 interface IPracticeSettingBasicCard {
   element: JSX.Element;

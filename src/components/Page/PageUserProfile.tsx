@@ -2,7 +2,7 @@ import React from 'react';
 import BootstrapGridColumn from '../Bootstrap/Grid/Column/BootstrapGridColumn';
 import BootstrapGridContainer from '../Bootstrap/Grid/Container/BootstrapGridContainer';
 import BootstrapGridRow from '../Bootstrap/Grid/Row/BootstrapGridRow';
-import ProfilePracticeStats from '../Profile/PracticeStats/ProfilePracticeStats';
+import ProfilePracticeStats from '../Profile/ProfilePracticeStats';
 import Page from './Page';
 
 export default function PageUserProfile() {
