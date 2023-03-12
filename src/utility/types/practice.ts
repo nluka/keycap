@@ -25,7 +25,8 @@ export interface IPracticeConfig {
   medleyWordCount: number;
   medleyPunctuationFrequency: number;
   mistakeHighlightStyle: PracticeMistakeHighlightStyle;
-  quoteLength: IQuoteLength;
+  englishQuoteLengthRange: IQuoteLengthRange;
+  russianQuoteSentences: number;
   soundVolume: number;
   textCasing: PracticeTextCasing;
   textType: PracticeTextType;
@@ -34,11 +35,15 @@ export interface IPracticeConfig {
 
 export type PracticeSettingName = keyof IPracticeConfig;
 
-export type PracticeTextType = 'quote' | 'medley' | 'custom';
+export type PracticeTextType =
+  | 'English quote'
+  | 'Russian bible'
+  | 'medley'
+  | 'custom';
 export type PracticeTextCasing = 'dynamic' | 'force-lower' | 'force-upper';
 export type PracticeCaretStyle = 'bar' | 'block' | 'underline' | 'outline';
 export type PracticeMistakeHighlightStyle = 'background' | 'text';
-export interface IQuoteLength {
+export interface IQuoteLengthRange {
   min: number;
   max: number;
 }

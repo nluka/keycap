@@ -1,6 +1,6 @@
 import NumberRange from 'nluka-number-range';
-import type { IQuoteLength } from '../types/practice';
+import type { IQuoteLengthRange } from '../types/practice';
 
-export default function convertQuoteLengthToNumberRange(ql: IQuoteLength) {
+export default function convertQuoteLengthToNumberRange(ql: IQuoteLengthRange) {
   return new NumberRange(ql.min, ql.max);
 }

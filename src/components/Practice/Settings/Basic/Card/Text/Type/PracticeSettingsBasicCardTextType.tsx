@@ -19,7 +19,7 @@ function Input() {
   return (
     <PracticeSettingsBasicCardInputRadio
       name="textType"
-      options={['quote', 'medley', 'custom']}
+      options={['English quote', 'Russian bible', 'medley', 'custom']}
       value={textType}
     />
   );

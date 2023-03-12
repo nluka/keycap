@@ -13,7 +13,24 @@ import {
 import storage from './local-storage';
 import isEnvironmentProduction from './utility/functions/isEnvironmentProduction';
 
-console.log(`%cEnvironment = ${import.meta.env.MODE}`, INFO_MESSAGE_STYLES);
+(function main() {
+  console.log(`%cEnvironment = ${import.meta.env.MODE}`, INFO_MESSAGE_STYLES);
+
+  try {
+    render();
+  } catch (err: any) {
+    storage.setPracticeSettings(DEFAULT_PRACTICE_SETTINGS);
+    render();
+  }
+
+  if (!isEnvironmentProduction()) {
+    // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
+    // Learn more: https://snowpack.dev/concepts/hot-module-replacement
+    if (import.meta.hot) {
+      import.meta.hot.accept();
+    }
+  }
+})();
 
 function render() {
   ReactDOM.render(
@@ -24,19 +41,4 @@ function render() {
     </React.StrictMode>,
     document.getElementById('root'),
   );
-}
-
-try {
-  render();
-} catch (err: any) {
-  storage.setPracticeSettings(DEFAULT_PRACTICE_SETTINGS);
-  render();
-}
-
-if (!isEnvironmentProduction()) {
-  // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
-  // Learn more: https://snowpack.dev/concepts/hot-module-replacement
-  if (import.meta.hot) {
-    import.meta.hot.accept();
-  }
 }

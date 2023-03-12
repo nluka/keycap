@@ -26,6 +26,7 @@ const items = {
   isPanelCollapsedProfileDangerZone: 'isPanelCollapsedProfileDangerZone',
   isPanelCollapsedProfilePracticeResults:
     'isPanelCollapsedProfilePracticeResults',
+  russianBibleSentences: 'russianBibleSentences',
 };
 Object.freeze(items);
 
@@ -102,6 +103,27 @@ function setBool(key: string, value: boolean) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+function hasRussianBibleSentenceData() {
+  return localStorage.getItem(items.russianBibleSentences) !== null;
+}
+
+async function downloadRussianBibleSentenceData() {
+  const fileName = 'russian-bible-sentences.txt';
+  try {
+    const res = await fetch(`/${fileName}`);
+    const text = await res.text();
+    localStorage.setItem(items.russianBibleSentences, text);
+    return text;
+  } catch (err: any) {
+    console.error(`Failed to fetch file "${fileName}":`, err);
+    throw new Error(`Failed to fetch file "${fileName}"`);
+  }
+}
+
+function getRussianBibleSentenceData() {
+  return localStorage.getItem(items.russianBibleSentences);
+}
+
 const exports = {
   items,
   getPracticeSettings,
@@ -113,6 +135,9 @@ const exports = {
   addAbortedRound,
   getBool,
   setBool,
+  hasRussianBibleSentenceData,
+  downloadRussianBibleSentenceData,
+  getRussianBibleSentenceData,
 };
 
 export default exports;

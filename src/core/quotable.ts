@@ -12,12 +12,12 @@ interface IQuoteableApiQuote {
   tags: string[];
 }
 
-export async function fetchRandQuote(config: IPracticeConfig) {
+export async function fetchRandEnglishQuote(config: IPracticeConfig) {
   // API docs: https://github.com/lukePeavey/quotable
 
   const url = getUrlWithAppendedQueryParams('https://api.quotable.io/random', {
-    minLength: config.quoteLength.min,
-    maxLength: config.quoteLength.max,
+    minLength: config.englishQuoteLengthRange.min,
+    maxLength: config.englishQuoteLengthRange.max,
   });
 
   try {

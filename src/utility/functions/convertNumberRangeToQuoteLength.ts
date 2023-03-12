@@ -1,9 +1,9 @@
 import type NumberRange from 'nluka-number-range';
-import type { IQuoteLength } from '../types/practice';
+import type { IQuoteLengthRange } from '../types/practice';
 
 export default function convertNumberRangeToQuoteLength(
   range: NumberRange,
-): IQuoteLength {
+): IQuoteLengthRange {
   return {
     min: range.getMin(),
     max: range.getMax(),

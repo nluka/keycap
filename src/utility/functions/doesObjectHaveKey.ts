@@ -3,7 +3,7 @@
  * @param obj The object to check.
  * @param key The key to search for.
  */
-export default function doesObjectHaveKey<O>(
+export default function doesObjectHaveKey<O extends object>(
   obj: O,
   key: PropertyKey,
 ): key is keyof O {

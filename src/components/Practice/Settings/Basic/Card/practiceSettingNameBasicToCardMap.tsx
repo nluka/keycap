@@ -11,10 +11,11 @@ import PracticeSettingsBasicCardMedleyCollectionsActive from './Medley/Collectio
 import PracticeSettingsBasicCardMedleyWordCount from './Medley/WordCount/PracticeSettingsBasicCardMedleyWordCount';
 import PracticeSettingsBasicCardMedleyPunctuationFrequency from './Medley/PunctuationFrequency/PracticeSettingsBasicCardMedleyPunctuationFrequency';
 import PracticeSettingsBasicCardMistakeHighlightStyle from './MistakeHighlightStyle/PracticeSettingsBasicCardMistakeHighlightStyle';
-import PracticeSettingsBasicCardQuoteLength from './QuoteLength/PracticeSettingsBasicCardQuoteLength';
+import PracticeSettingsBasicCardEnglishQuoteLengthRange from './EnglishQuoteLength/PracticeSettingsBasicCardEnglishQuoteLengthRange';
 import PracticeSettingsBasicCardTextCasing from './Text/Casing/PracticeSettingsBasicCardTextCasing';
 import PracticeSettingsBasicCardTextType from './Text/Type/PracticeSettingsBasicCardTextType';
 import PracticeSettingsBasicCardSoundVolume from './SoundVolume/PracticeSettingsBasicCardSoundVolume';
+import PracticeSettingsBasicCardRussianQuoteSentences from './RussianSentences/PracticeSettingsBasicCardRussianQuoteSentences';
 
 interface IPracticeSettingBasicCard {
   element: JSX.Element;
@@ -32,6 +33,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['text type', 'gameplay'],
     },
   ],
+
   [
     'textCasing',
     {
@@ -39,6 +41,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['text casing', 'text case', 'text capitalization', 'gameplay'],
     },
   ],
+
   [
     'isPunctuationEnabled',
     {
@@ -51,13 +54,23 @@ const practiceSettingNameBasicToCardMap = new Map<
       ],
     },
   ],
+
   [
-    'quoteLength',
+    'englishQuoteLengthRange',
     {
-      element: <PracticeSettingsBasicCardQuoteLength key={v4()} />,
-      tags: ['quote length', 'quote characters', 'gameplay'],
+      element: <PracticeSettingsBasicCardEnglishQuoteLengthRange key={v4()} />,
+      tags: ['english quote length range', 'quote characters', 'gameplay'],
     },
   ],
+
+  [
+    'russianQuoteSentences',
+    {
+      element: <PracticeSettingsBasicCardRussianQuoteSentences key={v4()} />,
+      tags: ['russian quote length range', 'quote characters', 'gameplay'],
+    },
+  ],
+
   [
     'medleyCollectionsActive',
     {
@@ -65,6 +78,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['active medley collections', 'active collections', 'gameplay'],
     },
   ],
+
   [
     'medleyWordCount',
     {
@@ -78,6 +92,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       ],
     },
   ],
+
   [
     'medleyPunctuationFrequency',
     {
@@ -87,6 +102,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['medley punctuation frequency', 'gameplay'],
     },
   ],
+
   [
     'customTextActive',
     {
@@ -94,7 +110,9 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['active custom text', 'gameplay'],
     },
   ],
+
   // TODO: isInstantDeathEnabled
+
   [
     'isResultRecordingEnabled',
     {
@@ -102,7 +120,9 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['countdown length', 'countdown time', 'gameplay'],
     },
   ],
+
   // TODO: isKeyboardVisualEnabled
+
   [
     'countdownLength',
     {
@@ -110,6 +130,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       tags: ['countdown length', 'countdown time', 'gameplay'],
     },
   ],
+
   [
     'caretStyle',
     {
@@ -123,6 +144,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       ],
     },
   ],
+
   [
     'caretDelay',
     {
@@ -136,6 +158,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       ],
     },
   ],
+
   [
     'mistakeHighlightStyle',
     {
@@ -149,6 +172,7 @@ const practiceSettingNameBasicToCardMap = new Map<
       ],
     },
   ],
+
   [
     'soundVolume',
     {
