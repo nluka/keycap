@@ -27,12 +27,12 @@ export default function PracticePlayAreaMistakeAnalysis(props: IProps) {
     return (
       <>
         <span>Mistakes:</span>
-        {props.selectedChar.mistakes.map((m, index) => {
+        {props.selectedChar.mistakes.map((m) => {
           return (
             <div
               key={v4()}
               className="mistake p-0 rounded"
-              title={`Mistake ${index + 1}`}
+              // title={`Mistake ${index + 1}`}
             >
               <span className="input px-2">
                 {m.input === SPACE
