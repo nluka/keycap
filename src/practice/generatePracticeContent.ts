@@ -54,7 +54,7 @@ export default async function generatePracticeContent(config: IPracticeConfig) {
 }
 
 async function generateEnglishQuote(config: IPracticeConfig) {
-  const content = await fetchRandEnglishQuote(config);
+  const content = fetchRandEnglishQuote(config);
   return content instanceof Error
     ? new Error(`Failed to generate text: ${content.message}`)
     : content;

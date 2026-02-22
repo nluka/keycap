@@ -40,7 +40,7 @@ export const DEFAULT_PRACTICE_SETTINGS: IPracticeSettings = {
 };
 
 export const PRACTICE_SETTINGS_ENGLISH_QUOTE_LENGTH_RANGE_LIMITS =
-  new NumberRange(1, 250);
+  new NumberRange(20, 430); // src\resources\quotes.ts
 export const PRACTICE_SETTINGS_RUSSIAN_QUOTE_SENTENCES_LIMITS = new NumberRange(
   1,
   5,
